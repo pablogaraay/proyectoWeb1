@@ -3,3 +3,4 @@
 - Pablo Garay Pérez
 - Jesús Alfonso Marín Sánchez
 - Alejandro Lillo Rodríguez
+- Juan Cordero Pascual
