@@ -1,11 +1,19 @@
 import Nav from './Nav';
-import './App.css';
+import Card from './Card';
+import './Cards.css';
 
 function App() {
   return (
-    <div className='App'>
-      <Nav />
-    </div>
+    <>
+      <div>
+        <Nav />
+      </div>
+      <div className='Cards'>
+        <Card />
+        <Card />
+        <Card />
+      </div>
+    </>
   );
 }
 

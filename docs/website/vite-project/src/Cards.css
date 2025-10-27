@@ -1,0 +1,38 @@
+.Cards {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.Cards > div {
+  flex: 0 1 calc(33.333% - 1rem);
+  min-width: 280px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.Cards > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.Cards > div > div:first-child {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  font-weight: 500;
+}
+
+.Cards > div > div:last-child {
+  background: rgba(255, 255, 255, 0.85);
+  color: #555;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
