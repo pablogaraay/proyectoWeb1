@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+.App {
+  background-color: #f8fafc; /* slate-50 */
+  min-height: 100vh;
+}
