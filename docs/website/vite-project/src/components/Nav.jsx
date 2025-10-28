@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import info from '../info.json';
 
 function Nav() {
   const navigate = useNavigate();
@@ -51,17 +52,30 @@ function Nav() {
           </button>
         </div>
 
-        {/* Botón de iniciar sesión a la derecha */}
-        <div>
-          <button
-            className={buttonPrimaryStyles}
-            onClick={() => {
-              navigate('/login');
-            }}
-          >
-            Iniciar sesión
-          </button>
-        </div>
+        {/* Botón de iniciar sesión a la derecha - solo si es invitado */}
+        {info.esInvitado === true ? (
+          <div>
+            <button
+              className={buttonPrimaryStyles}
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              Iniciar sesión
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button
+              className={buttonPrimaryStyles}
+              onClick={() => {
+                navigate('/account');
+              }}
+            >
+              Tu perfil
+            </button>
+          </div>
+        )}
       </nav>
     </header>
   );
