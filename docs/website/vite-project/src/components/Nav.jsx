@@ -49,7 +49,10 @@ function Nav() {
           >
             Sobre nosotros
           </button>
+        </div>
 
+        {/* Botón de iniciar sesión a la derecha */}
+        <div>
           <button
             className={buttonPrimaryStyles}
             onClick={() => {
@@ -59,9 +62,6 @@ function Nav() {
             Iniciar sesión
           </button>
         </div>
-
-        {/* Espacio vacío a la derecha para equilibrar */}
-        <div className='w-12'></div>
       </nav>
     </header>
   );
