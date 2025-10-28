@@ -13,8 +13,8 @@ function Nav() {
 
   return (
     <header className='bg-gray-100 border-b-2 border-slate-200 shadow-lg sticky top-0 z-10'>
-      <nav className='relative flex justify-center items-center p-8 max-w-6xl mx-auto'>
-        {/* Logo a la izquierda - clic va a home */}
+      <nav className='relative flex justify-center items-center p-8'>
+        {/* Logo a la izquierda - pegado al borde */}
         <div className='absolute left-8'>
           <LogoNavBar />
         </div>
@@ -26,7 +26,7 @@ function Nav() {
           <BotonAboutUs />
         </div>
 
-        {/* Botón de iniciar sesión a la derecha - solo si es invitado */}
+        {/* Botón de iniciar sesión a la derecha - pegado al borde */}
         <div className='absolute right-8'>
           {info.esInvitado === true ? <BotonIniciarSesion /> : <BotonPerfil />}
         </div>
