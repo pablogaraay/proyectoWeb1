@@ -1,7 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Nav() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   // 🎨 Estilos centralizados para los botones
   const buttonBaseStyles =
@@ -49,7 +50,14 @@ function Nav() {
             Sobre nosotros
           </button>
 
-          <button className={buttonPrimaryStyles}>Iniciar sesión</button>
+          <button
+            className={buttonPrimaryStyles}
+            onClick={() => {
+              navigate('/login');
+            }}
+          >
+            Iniciar sesión
+          </button>
         </div>
 
         {/* Espacio vacío a la derecha para equilibrar */}
