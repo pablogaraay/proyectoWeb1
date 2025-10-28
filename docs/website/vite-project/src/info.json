@@ -1,3 +1,13 @@
 {
-  "esInvitado": true
+  "esInvitado": true,
+  "cuentas": [
+    {
+      "usuario": "victor",
+      "contraseña": "1234"
+    },
+    {
+      "usuario": "alejandro",
+      "contraseña": "1234"
+    }
+  ]
 }

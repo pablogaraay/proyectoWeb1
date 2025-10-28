@@ -1,9 +1,29 @@
+import { useOutletContext } from 'react-router-dom';
+import info from '../info.json';
+
 function Login() {
+  const { handleInvitado } = useOutletContext();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí irá la lógica de login
-    console.log('Formulario enviado');
+    const formData = new FormData(e.target);
+    const email = formData.get('email');
+    const password = formData.get('password');
+
+    console.log(`Email: ${email} y contraseña: ${password}`);
+    console.log(`Return de validacion: ${existeCuenta(email, password)}`);
+
+    handleInvitado(existeCuenta(email, password));
   };
+
+  function existeCuenta(email, password) {
+    for (let cuenta of info.cuentas) {
+      if (cuenta.usuario === email && cuenta.contraseña === password) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   return (
     <div className='min-h-screen bg-slate-50 flex items-start justify-center px-4 pt-16 pb-8'>
