@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import data from '../data/contenidoCartas.json';
-import Card from './Card';
+import CatalogoCard from './cards/CatalogoCard';
 import BotonBuscador from './botones/BotonBuscador.jsx';
 import BarraBuscador from './BarraBuscador.jsx';
 
@@ -41,7 +41,7 @@ function Catalogo() {
 
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
         {cartasFiltradas.map((carta, index) => (
-          <Card
+          <CatalogoCard
             key={index}
             titulo={carta.titulo}
             descripcion={carta.descripcion}

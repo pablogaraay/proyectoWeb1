@@ -1,4 +1,3 @@
-import { useNavigate, useLocation } from 'react-router-dom';
 import LogoNavBar from './logos/LogoNavBar.jsx';
 import BotonCatalogo from './botones/BotonCatalogo.jsx';
 import BotonAboutUs from './botones/BotonAboutUs.jsx';
@@ -8,8 +7,6 @@ import BotonPerfil from './botones/BotonPerfil.jsx';
 import { INVITADO } from './App.jsx';
 
 function Nav({esInvitado}) {
-  const navigate = useNavigate();
-  const location = useLocation();
 
   return (
     <header className='bg-gray-100 border-b-2 border-slate-200 shadow-lg sticky top-0 z-10'>

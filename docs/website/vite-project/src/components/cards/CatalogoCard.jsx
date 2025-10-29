@@ -1,4 +1,4 @@
-function Card({ titulo, descripcion, imagen }) {
+function CatalogoCard({ titulo, descripcion, imagen }) {
   return (
     <div className="divide-y divide-gray-200 overflow-hidden rounded-xl bg-white shadow-md hover:shadow-lg transition-shadow duration-200 dark:bg-gray-800 dark:divide-gray-700">
       <div className="p-4 flex flex-col items-center">
@@ -16,4 +16,4 @@ function Card({ titulo, descripcion, imagen }) {
   );
 }
 
-export default Card;
+export default CatalogoCard;
