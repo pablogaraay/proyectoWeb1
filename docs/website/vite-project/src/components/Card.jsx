@@ -1,14 +1,18 @@
-function Card() {
+function Card({ titulo, descripcion, imagen }) {
   return (
-    <>
-      <div className='divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm dark:divide-white/10 dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10'>
-        <div className='px-4 py-5 sm:p-6'>Content goes here</div>
-        <div className='px-4 py-4 sm:px-6'>
-          Content goes here We use less vertical padding on card footers at all
-          sizes than on headers or body sections
-        </div>
+    <div className="divide-y divide-gray-200 overflow-hidden rounded-xl bg-white shadow-md hover:shadow-lg transition-shadow duration-200 dark:bg-gray-800 dark:divide-gray-700">
+      <div className="p-4 flex flex-col items-center">
+        <img
+          src={imagen}
+          alt={titulo}
+          className="w-32 h-32 object-cover rounded-md mb-3"
+        />
+        <h2 className="text-lg font-semibold text-gray-800 dark:text-white">{titulo}</h2>
       </div>
-    </>
+      <div className="p-4 text-gray-600 text-sm dark:text-gray-300">
+        {descripcion}
+      </div>
+    </div>
   );
 }
 

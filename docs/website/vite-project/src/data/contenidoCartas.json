@@ -1,0 +1,35 @@
+{
+    "cartas":[
+        {
+            "titulo":"Carta 1",
+            "descripcion":"Descripción de la carta 1",
+            "imagen":"ruta/a/la/imagen1.jpg"
+        },
+        {
+            "titulo":"Carta 2",
+            "descripcion":"Descripción de la carta 2",
+            "imagen":"ruta/a/la/imagen2.jpg"
+        },
+        {
+            "titulo":"Carta 3",
+            "descripcion":"Descripción de la carta 3",
+            "imagen":"ruta/a/la/imagen3.jpg"
+        },
+        {
+            "titulo":"Carta 4",
+            "descripcion":"Descripción de la carta 4",
+            "imagen":"ruta/a/la/imagen4.jpg"
+        },
+        {
+            "titulo":"Carta 5",
+            "descripcion":"Descripción de la carta 5",
+            "imagen":"ruta/a/la/imagen5.jpg"
+        },
+        {
+            "titulo":"Carta 6",
+            "descripcion":"Descripción de la carta 6",
+            "imagen":"ruta/a/la/imagen6.jpg"
+        }
+
+    ]
+}
