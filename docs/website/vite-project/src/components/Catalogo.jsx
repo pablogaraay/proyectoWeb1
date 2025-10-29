@@ -7,7 +7,7 @@ function Catalogo() {
     const [mostrarBuscador, setMostrarBuscador] = useState(false);
     const [filtrar,setFiltrar] = useState("");
 
-    const cartasFiltradas = data.cartas.filter((carta)=>carta.titulo.toLowerCase().includes(filtrar.toLowerCase()));
+    const cartasFiltradas = data.cartas.filter((carta)=>carta.titulo.toLowerCase().includes(filtrar.trim().toLowerCase()));
   return (
     <div className="p-8">
       <div className="flex items-center justify-between mb-6">
