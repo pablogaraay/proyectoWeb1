@@ -3,11 +3,8 @@ import data from '../data/contenidoCartas.json';
 import CatalogoCard from './cards/CatalogoCard';
 import BotonBuscador from './botones/BotonBuscador.jsx';
 import BarraBuscador from './BarraBuscador.jsx';
+import { BUSCADOR } from '../constantes.js';
 
-export const BUSCADOR = {
-  INEXISTENTE: false,
-  EXISTENTE: true,
-};
 
 function Catalogo() {
   const [mostrarBuscador, setMostrarBuscador] = useState(BUSCADOR.INEXISTENTE);

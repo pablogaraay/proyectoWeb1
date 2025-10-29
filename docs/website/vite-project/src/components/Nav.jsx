@@ -4,28 +4,31 @@ import BotonAboutUs from './botones/BotonAboutUs.jsx';
 import BotonIniciarSesion from './botones/BotonIniciarSesion.jsx';
 import BotonNoticias from './botones/BotonNoticias.jsx';
 import BotonPerfil from './botones/BotonPerfil.jsx';
-import { INVITADO } from './App.jsx';
+import { INVITADO } from '../constantes.js';
 
-function Nav({esInvitado}) {
-
+function Nav({ esInvitado }) {
   return (
-    <header className='bg-gray-100 border-b-2 border-slate-200 shadow-lg sticky top-0 z-10'>
-      <nav className='relative flex justify-center items-center p-8'>
+    <header className='bg-slate-50 border-b border-slate-200 shadow-sm sticky top-0 z-10 backdrop-blur-sm bg-slate-50/95'>
+      <nav className='relative flex justify-center items-center py-4 px-6'>
         {/* Logo a la izquierda - pegado al borde */}
-        <div className='absolute left-8'>
+        <div className='absolute left-6'>
           <LogoNavBar />
         </div>
 
         {/* Botones de navegación centrados */}
-        <div className='flex gap-5'>
+        <div className='flex gap-3'>
           <BotonCatalogo />
           <BotonNoticias />
           <BotonAboutUs />
         </div>
 
         {/* Botón de iniciar sesión a la derecha - pegado al borde */}
-        <div className='absolute right-8'>
-          { esInvitado === INVITADO.SI ? <BotonIniciarSesion /> : <BotonPerfil />}
+        <div className='absolute right-6'>
+          {esInvitado === INVITADO.SI ? (
+            <BotonIniciarSesion />
+          ) : (
+            <BotonPerfil />
+          )}
         </div>
       </nav>
     </header>

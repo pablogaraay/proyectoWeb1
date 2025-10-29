@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import Nav from './Nav';
 import { Outlet } from 'react-router-dom';
-
-export const INVITADO = {
-  SI: true,
-  NO: false,
-};
+import { INVITADO } from '../constantes';
 
 function App() {
   const [esInvitado, setInvitado] = useState(INVITADO.SI);
