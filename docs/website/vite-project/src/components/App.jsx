@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Nav from './Nav';
 import { Outlet } from 'react-router-dom';
 
-const INVITADO = {
+export const INVITADO = {
   SI: true,
   NO: false,
 };
@@ -19,7 +19,7 @@ function App() {
   return (
     <div className='App'>
       {/* Navigation */}
-      <Nav />
+      <Nav esInvitado={esInvitado} />
 
       {/* Main Content Container */}
       <div className='max-w-6xl mx-auto px-8 py-12'>

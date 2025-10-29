@@ -1,13 +1,13 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import info from '../info.json';
 import LogoNavBar from './logos/LogoNavBar.jsx';
 import BotonCatalogo from './botones/BotonCatalogo.jsx';
 import BotonAboutUs from './botones/BotonAboutUs.jsx';
 import BotonIniciarSesion from './botones/BotonIniciarSesion.jsx';
 import BotonNoticias from './botones/BotonNoticias.jsx';
 import BotonPerfil from './botones/BotonPerfil.jsx';
+import { INVITADO } from './App.jsx';
 
-function Nav() {
+function Nav({esInvitado}) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,7 +28,7 @@ function Nav() {
 
         {/* Botón de iniciar sesión a la derecha - pegado al borde */}
         <div className='absolute right-8'>
-          {info.esInvitado === true ? <BotonIniciarSesion /> : <BotonPerfil />}
+          { esInvitado === INVITADO.SI ? <BotonIniciarSesion /> : <BotonPerfil />}
         </div>
       </nav>
     </header>
