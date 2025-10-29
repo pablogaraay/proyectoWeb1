@@ -29,6 +29,11 @@
             "titulo":"Carta 6",
             "descripcion":"Descripción de la carta 6",
             "imagen":"ruta/a/la/imagen6.jpg"
+        },
+        {
+            "titulo":"Carta 7",
+            "descripcion":"Descripción de la carta 7",
+            "imagen":"ruta/a/la/imagen7.jpg"
         }
 
     ]

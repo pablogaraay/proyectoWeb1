@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import data from '../data/contenidoCartas.json';
 import Card from './Card';
-import Buscador from './botones/BotonBuscador.jsx';
+import BotonBuscador from './botones/BotonBuscador.jsx';
 
 function Catalogo() {
     const [mostrarBuscador, setMostrarBuscador] = useState(false);
@@ -14,7 +14,7 @@ function Catalogo() {
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
           Catálogo de Productos
         </h1>
-        <Buscador onfiltrar = {()=>setMostrarBuscador(!mostrarBuscador)}/>
+        <BotonBuscador onfiltrar = {()=>setMostrarBuscador(!mostrarBuscador)}/>
       </div>
       {mostrarBuscador && (
         <div className="mb-6">
