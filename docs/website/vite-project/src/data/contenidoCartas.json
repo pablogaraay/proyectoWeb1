@@ -1,40 +1,61 @@
 {
-    "cartas":[
-        {
-            "titulo":"Carta 1",
-            "descripcion":"Descripción de la carta 1",
-            "imagen":"ruta/a/la/imagen1.jpg"
-        },
-        {
-            "titulo":"Carta 2",
-            "descripcion":"Descripción de la carta 2",
-            "imagen":"ruta/a/la/imagen2.jpg"
-        },
-        {
-            "titulo":"Carta 3",
-            "descripcion":"Descripción de la carta 3",
-            "imagen":"ruta/a/la/imagen3.jpg"
-        },
-        {
-            "titulo":"Carta 4",
-            "descripcion":"Descripción de la carta 4",
-            "imagen":"ruta/a/la/imagen4.jpg"
-        },
-        {
-            "titulo":"Carta 5",
-            "descripcion":"Descripción de la carta 5",
-            "imagen":"ruta/a/la/imagen5.jpg"
-        },
-        {
-            "titulo":"Carta 6",
-            "descripcion":"Descripción de la carta 6",
-            "imagen":"ruta/a/la/imagen6.jpg"
-        },
-        {
-            "titulo":"Carta 7",
-            "descripcion":"Descripción de la carta 7",
-            "imagen":"ruta/a/la/imagen7.jpg"
-        }
-
-    ]
+  "cartas": [
+    {
+      "titulo": "Carta 1",
+      "descripcion": "Descripción de la carta 1",
+      "imagen": "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=600&h=400&fit=crop"
+    },
+    {
+      "titulo": "Carta 2",
+      "descripcion": "Descripción de la carta 2",
+      "imagen": "https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=600&h=400&fit=crop"
+    },
+    {
+      "titulo": "Carta 3",
+      "descripcion": "Descripción de la carta 3",
+      "imagen": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&h=400&fit=crop"
+    },
+    {
+      "titulo": "Carta 4",
+      "descripcion": "Descripción de la carta 4",
+      "imagen": "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=600&h=400&fit=crop"
+    },
+    {
+      "titulo": "Carta 5",
+      "descripcion": "Descripción de la carta 5",
+      "imagen": "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?w=600&h=400&fit=crop"
+    },
+    {
+      "titulo": "Carta 6",
+      "descripcion": "Descripción de la carta 6",
+      "imagen": "https://images.unsplash.com/photo-1609587312208-cea54be969e7?w=600&h=400&fit=crop"
+    },
+    {
+      "titulo": "Carta 7",
+      "descripcion": "Descripción de la carta 7",
+      "imagen": "https://images.unsplash.com/photo-1611695434398-4f4b330623e6?w=600&h=400&fit=crop"
+    }
+  ],
+  "noticias": [
+    {
+      "id": 1,
+      "imagen": "https://images.unsplash.com/photo-1594534475808-b18fc33b045e?w=600&h=400&fit=crop",
+      "descripcion": "Primera noticia sobre relojes de lujo y las últimas tendencias en relojería."
+    },
+    {
+      "id": 2,
+      "imagen": "https://images.unsplash.com/photo-1562159278-1253a58da141?w=600&h=400&fit=crop",
+      "descripcion": "Segunda noticia destacada del mundo de la alta relojería y sus innovaciones."
+    },
+    {
+      "id": 3,
+      "imagen": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=600&h=400&fit=crop",
+      "descripcion": "Tercera noticia con información relevante sobre marcas y colecciones exclusivas."
+    },
+    {
+      "id": 4,
+      "imagen": "https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=600&h=400&fit=crop",
+      "descripcion": "Cuarta noticia con las novedades más recientes del sector relojero."
+    }
+  ]
 }

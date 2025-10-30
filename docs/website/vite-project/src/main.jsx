@@ -9,6 +9,7 @@ import Account from './components/Account.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import Catalogo from './components/Catalogo.jsx';
+import Noticias from './components/Noticias.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -19,7 +20,8 @@ createRoot(document.getElementById('root')).render(
           <Route path='aboutus' element={<AboutUs />} />
           <Route path='account' element={<Account />} />
           <Route path='login' element={<Login />} />
-          <Route path = 'catalogo' element = {<Catalogo />} />
+          <Route path='noticias' element={<Noticias />} />
+          <Route path='catalogo' element={<Catalogo />} />
           <Route path='register' element={<Register />} />
         </Route>
       </Routes>
