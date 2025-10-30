@@ -1,6 +1,6 @@
 function AboutUsCard() {
   return (
-    <div className='h-full min-h-[600px] bg-white rounded-3xl shadow-2xl p-12 flex flex-col dark:bg-gray-800'>
+    <div className='h-full min-h-[600px] bg-slate-50 rounded-3xl shadow-2xl p-12 flex flex-col dark:bg-gray-800 border border-slate-200'>
       {/* Encabezado con título grande */}
       <div className='mb-8'>
         <h1 className='text-5xl font-bold text-slate-800 dark:text-white mb-4'>

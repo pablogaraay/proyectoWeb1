@@ -26,8 +26,8 @@ function Login() {
   }
 
   return (
-    <div className='min-h-screen bg-slate-50 flex items-start justify-center px-4 pt-16 pb-8'>
-      <div className='bg-white rounded-3xl shadow-2xl p-8 w-full max-w-md'>
+    <div className='min-h-screen bg-slate-50 flex items-start justify-center px-4 pt-2 pb-8'>
+      <div className='bg-slate-50 rounded-3xl shadow-2xl p-8 w-full max-w-md border border-slate-200'>
         {/* Título */}
         <h1 className='text-4xl font-bold text-slate-800 text-center mb-6'>
           Login
@@ -93,7 +93,7 @@ function Login() {
           {/* Botón Submit */}
           <button
             type='submit'
-            className='w-full py-3 bg-indigo-600 text-white font-semibold text-lg rounded-xl hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl'
+            className='w-full py-3 bg-indigo-600 text-white font-semibold text-lg rounded-xl hover:bg-indigo-700 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl'
           >
             Acceder
           </button>
