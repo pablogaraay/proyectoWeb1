@@ -1,4 +1,4 @@
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, Link } from 'react-router-dom';
 import info from '../info.json';
 
 function Login() {
@@ -101,13 +101,13 @@ function Login() {
 
         {/* Enlace recuperar contraseña */}
         <p className='text-center mt-5 text-slate-600 text-sm'>
-          ¿Has olvidado la contraseña?{' '}
-          <a
-            href='#'
+          ¿No te has registrado todavía?{' '}
+          <Link
+            to='/register'
             className='text-indigo-600 hover:text-indigo-700 font-medium hover:underline'
           >
-            Recupérala aquí
-          </a>
+            Regístrate aquí
+          </Link>
         </p>
       </div>
     </div>
