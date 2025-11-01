@@ -1,5 +1,5 @@
 import { useOutletContext, Link } from 'react-router-dom';
-import info from '../info.json';
+import { existeCuenta } from '../utils.js';
 
 function Login() {
   const { handleInvitado } = useOutletContext();
@@ -15,15 +15,6 @@ function Login() {
 
     handleInvitado(existeCuenta(email, password));
   };
-
-  function existeCuenta(email, password) {
-    for (let cuenta of info.cuentas) {
-      if (cuenta.usuario === email && cuenta.contraseña === password) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   return (
     <div className='min-h-screen bg-slate-50 flex items-start justify-center px-4 pt-2 pb-8'>
