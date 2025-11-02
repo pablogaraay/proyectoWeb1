@@ -11,7 +11,7 @@ function Nav({ esInvitado }) {
   const location = useLocation();
 
   return (
-    <header className='bg-slate-50 border-b border-slate-200 shadow-sm sticky top-0 z-10 backdrop-blur-sm bg-slate-50/95'>
+    <header className='bg-slate-50 border-b border-slate-200 shadow-sm sticky top-0 z-10 backdrop-blur-sm'>
       <nav className='relative flex justify-center items-center py-4 px-6'>
         {/* Logo a la izquierda - pegado al borde */}
         <div className='absolute left-6'>

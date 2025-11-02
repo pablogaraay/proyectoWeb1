@@ -11,7 +11,7 @@ function NoticiasCard({ imagen, descripcion }) {
       </div>
 
       {/* Sección de la descripción */}
-      <div className='p-6 bg-slate-50 flex-grow'>
+      <div className='p-6 bg-slate-50 grow'>
         <p className='text-slate-700 text-base leading-relaxed'>
           {descripcion}
         </p>

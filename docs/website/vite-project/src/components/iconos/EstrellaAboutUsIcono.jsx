@@ -1,6 +1,6 @@
 function EstrellaAboutUsIcono() {
   return (
-    <div className='relative group w-52 h-52 bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 rounded-3xl flex flex-col items-center justify-center shadow-2xl hover:shadow-amber-500/60 transition-all duration-500 hover:scale-110 hover:-translate-y-2'>
+    <div className='relative group w-52 h-52 bg-linear-to-br from-amber-400 via-amber-500 to-amber-600 rounded-3xl flex flex-col items-center justify-center shadow-2xl hover:shadow-amber-500/60 transition-all duration-500 hover:scale-110 hover:-translate-y-2'>
       {/* Brillo sutil en la esquina */}
       <div className='absolute top-3 right-3 w-8 h-8 bg-white/30 rounded-full blur-xl'></div>
 

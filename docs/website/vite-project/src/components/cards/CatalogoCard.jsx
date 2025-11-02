@@ -12,7 +12,7 @@ function CatalogoCard({ titulo, descripcion, imagen }) {
         </h2>
       </div>
       {/* Descripción */}
-      <div className='p-4 text-gray-600 text-sm dark:text-gray-300 flex-grow'>
+      <div className='p-4 text-gray-600 text-sm dark:text-gray-300 grow'>
         {descripcion}
       </div>
     </div>
