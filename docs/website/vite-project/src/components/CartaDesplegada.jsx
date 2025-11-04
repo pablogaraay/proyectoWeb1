@@ -25,7 +25,7 @@ function CartaDesplegada({carta,onClose}){
     };
 
       return (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-black/50 bg-opacity-60 flex justify-center items-center z-50">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 w-full max-w-lg">
             <h2 className="text-2xl font-bold mb-2">{carta.titulo}</h2>
             <img src={carta.imagen} alt={carta.titulo} className="w-full h-64 object-cover rounded-xl mb-4" />
