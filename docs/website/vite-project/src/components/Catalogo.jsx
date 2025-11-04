@@ -9,6 +9,7 @@ import { BUSCADOR } from '../constantes.js';
 function Catalogo() {
   const [mostrarBuscador, setMostrarBuscador] = useState(BUSCADOR.INEXISTENTE);
   const [filtrar, setFiltrar] = useState('');
+  const [abrir,setAbrircarta] = useState(null);
 
   const onFiltrar = () => {
     const nuevoEstadoBuscador = !mostrarBuscador;
@@ -43,6 +44,7 @@ function Catalogo() {
             titulo={carta.titulo}
             descripcion={carta.descripcion}
             imagen={carta.imagen}
+            onClick={()=>setAbrircarta(carta)}
           />
         ))}
       </div>
