@@ -4,6 +4,8 @@ import CatalogoCard from './cards/CatalogoCard';
 import BotonBuscador from './botones/BotonBuscador.jsx';
 import BarraBuscador from './BarraBuscador.jsx';
 import { BUSCADOR } from '../constantes.js';
+import CartaDesplegada from './CartaDesplegada';
+
 
 
 function Catalogo() {
@@ -48,6 +50,12 @@ function Catalogo() {
           />
         ))}
       </div>
+      {abrir && (
+        <CartaDesplegada
+          carta={abrir}
+          onClose={() => setAbrircarta(null)}
+        />
+      )}
     </div>
   );
 }
