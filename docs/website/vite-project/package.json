@@ -4,18 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node_modules/.bin/vite",
-    "devW": "vite",
-    "build": "node_modules/.bin/vite build",
-    "preview": "node_modules/.bin/vite preview",
-    "format": "./node_modules/.bin/prettier --write .",
-    "format:check": "./node_modules/.bin/prettier --check ."
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.16",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.6",
+    "save-dev": "^0.0.1-security",
     "tailwindcss": "^4.1.16"
   },
   "devDependencies": {
@@ -28,6 +28,6 @@
     "eslint-plugin-react-refresh": "^0.4.22",
     "globals": "^16.4.0",
     "prettier": "^3.6.2",
-    "vite": "^7.1.7"
+    "vite": "^7.1.12"
   }
 }

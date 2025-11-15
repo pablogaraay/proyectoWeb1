@@ -1,8 +1,10 @@
-import { useOutletContext, Link } from 'react-router-dom';
+// src/components/Login.jsx
+import { useOutletContext, Link, useNavigate } from 'react-router-dom';
 import { existeCuenta } from '../utils.js';
 
 function Login() {
   const { handleInvitado } = useOutletContext();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -10,10 +12,20 @@ function Login() {
     const email = formData.get('email');
     const password = formData.get('password');
 
-    console.log(`Email: ${email} y contraseña: ${password}`);
-    console.log(`Return de validacion: ${existeCuenta(email, password)}`);
+    const loginOk = existeCuenta(email, password);
 
-    handleInvitado(existeCuenta(email, password));
+    console.log(`Email: ${email} y contraseña: ${password}`);
+    console.log(`Return de validacion: ${loginOk}`);
+
+    // Esto actualizará esInvitado en App.jsx
+    handleInvitado(loginOk);
+
+    if (loginOk) {
+      // Si el login es correcto, lo mando al catálogo
+      navigate('/catalogo');
+    } else {
+      alert('Usuario o contraseña incorrectos');
+    }
   };
 
   return (
@@ -45,7 +57,6 @@ function Login() {
 
         {/* Formulario */}
         <form onSubmit={handleSubmit} className='space-y-4'>
-          {/* Campo Usuario/Email */}
           <div>
             <label
               htmlFor='email'
@@ -63,7 +74,6 @@ function Login() {
             />
           </div>
 
-          {/* Campo Contraseña */}
           <div>
             <label
               htmlFor='password'
@@ -81,7 +91,6 @@ function Login() {
             />
           </div>
 
-          {/* Botón Submit */}
           <button
             type='submit'
             className='w-full py-3 bg-indigo-600 text-white font-semibold text-lg rounded-xl hover:bg-indigo-700 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl'
@@ -90,7 +99,6 @@ function Login() {
           </button>
         </form>
 
-        {/* Enlace recuperar contraseña */}
         <p className='text-center mt-5 text-slate-600 text-sm'>
           ¿No te has registrado todavía?{' '}
           <Link
