@@ -46,3 +46,9 @@ export function setUsuarioActual(email) {
 export function getUsuarioActual() {
   return usuarioActual;
 }
+
+export function limpiarUsuarioActual() {
+  // si no lo guardas en localStorage, con esto basta:
+  usuarioActual = null;
+  localStorage.removeItem('usuarioActual');
+}

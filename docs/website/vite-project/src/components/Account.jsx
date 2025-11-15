@@ -1,12 +1,19 @@
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
 import { INVITADO } from '../constantes';
-import { getUsuarioActual } from '../utils.js';
+import { getUsuarioActual, limpiarUsuarioActual } from '../utils.js';
 
 function Account() {
-  const { esInvitado } = useOutletContext();
+  const { esInvitado, handleInvitado } = useOutletContext();
   const navigate = useNavigate();
   const usuario = getUsuarioActual();
 
+  const handleLogout = () => {
+    limpiarUsuarioActual();     // limpiamos usuario en memoria
+    handleInvitado(false);      // vuelve a estado INVITADO.SI en App.jsx
+    navigate('/');              // redirigimos donde quieras
+  };
+
+  // Si NO está logueado
   if (esInvitado === INVITADO.SI || !usuario) {
     return (
       <div className="max-w-md mx-auto mt-10 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
@@ -34,19 +41,22 @@ function Account() {
     );
   }
 
+  // Si SÍ está logueado
   return (
     <div className="max-w-md mx-auto mt-10 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-center text-slate-800 dark:text-white">
         Mi perfil
       </h2>
-      <p className="text-slate-700 dark:text-slate-200">
-        <span className="font-semibold">Email:</span> {usuario.usuario}
+
+      <p className="text-slate-700 dark:text-slate-200 mb-2">
+        <span className="font-semibold">Usuario / Email:</span> {usuario.usuario}
       </p>
+
       <button
-        onClick={() => navigate('/catalogo')}
-        className="mt-6 w-full py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+        onClick={handleLogout}
+        className="mt-6 w-full py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
       >
-        Volver al catálogo
+        Cerrar sesión
       </button>
     </div>
   );
