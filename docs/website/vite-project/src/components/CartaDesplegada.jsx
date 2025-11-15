@@ -56,36 +56,39 @@ function CartaDesplegada({ carta, onClose }) {
 
         <label className="block text-gray-700 font-semibold">Valoración:</label>
         <select
-          value={valoracion}
-          onChange={(e) => setValoracion(Number(e.target.value))}
-          className="border rounded-lg p-2 mb-3 w-full dark:bg-gray-700 dark:text-white"
+        value={valoracion}
+        onChange={(e) => setValoracion(Number(e.target.value))}
+        className={`border rounded-lg p-2 mb-3 w-full dark:bg-gray-700 dark:text-white ${
+            !estaLogueado ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
+        disabled={!estaLogueado}          // 👈 también bloqueamos la valoración
         >
-          <option value={0}>Sin valorar</option>
-          {[1, 2, 3, 4, 5].map((n) => (
+        <option value={0}>Sin valorar</option>
+        {[1, 2, 3, 4, 5].map((n) => (
             <option key={n} value={n}>
-              {n} ⭐
+            {n} ⭐
             </option>
-          ))}
+        ))}
         </select>
 
         <textarea
-          value={comentario}
-          onChange={(e) => setComentario(e.target.value)}
-          placeholder={
+        value={comentario}
+        onChange={(e) => setComentario(e.target.value)}
+        placeholder={
             estaLogueado
-              ? 'Escribe un comentario...'
-              : 'Debes iniciar sesión para comentar.'
-          }
-          className={`w-full border rounded-lg p-2 mb-3 dark:bg-gray-700 dark:text-white ${
+            ? 'Escribe un comentario...'
+            : 'Debes iniciar sesión para comentar.'
+        }
+        className={`w-full border rounded-lg p-2 mb-3 dark:bg-gray-700 dark:text-white ${
             !estaLogueado ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-          disabled={!estaLogueado}
+        }`}
+        disabled={!estaLogueado}
         />
 
         {!estaLogueado && (
-          <p className="text-sm text-red-500 mb-2">
-            Para dejar un comentario debes estar registrado e iniciar sesión.
-          </p>
+        <p className="text-sm text-red-500 mb-2">
+            Para dejar un comentario o valoración debes estar registrado e iniciar sesión.
+        </p>
         )}
 
         <button
