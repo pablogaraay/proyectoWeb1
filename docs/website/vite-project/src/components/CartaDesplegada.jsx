@@ -1,4 +1,3 @@
-// src/components/CartaDesplegada.jsx
 import { useState, useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { INVITADO } from '../constantes';

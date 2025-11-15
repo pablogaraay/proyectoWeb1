@@ -1,6 +1,5 @@
-// src/components/Login.jsx
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
-import { existeCuenta } from '../utils.js';
+import { existeCuenta, setUsuarioActual } from '../utils.js';
 
 function Login() {
   const { handleInvitado } = useOutletContext();
@@ -21,6 +20,9 @@ function Login() {
     handleInvitado(loginOk);
 
     if (loginOk) {
+      // Guardamos quién es el usuario actual
+      setUsuarioActual(email);
+
       // Si el login es correcto, lo mando al catálogo
       navigate('/catalogo');
     } else {

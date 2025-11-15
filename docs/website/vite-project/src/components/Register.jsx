@@ -1,8 +1,11 @@
-//import { estaUsadoEmail } from '../utils.js';
+import { useNavigate } from 'react-router-dom';
+import { estaUsadoEmail, añadirCuenta } from '../utils.js';
 
 function Register() {
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
-    /*e.preventDefault();
+    e.preventDefault();
     const formData = new FormData(e.target);
     const email = formData.get('email');
     const password = formData.get('password');
@@ -12,23 +15,24 @@ function Register() {
       `Email: ${email}, contraseña: ${password}, confirmar contraseña: ${confirmarPassword}`
     );
 
-    if (coincidenContraseñas) {
-      //Continuar
-    } else {
-      //Hay que mostrar mensaje de error
+    // 1) Comprobar que las contraseñas coinciden
+    if (password !== confirmarPassword) {
+      alert('Las contraseñas no coinciden');
       return;
     }
 
-    //console.log(`Return de validacion: ${email}`);
-    console.log(`Email ya usado en otra cuenta: ${estaUsadoEmail(email)}`);
-    if (estaUsadoEmail) {
-      //Hay que mostrar un mensaje de error y que repita el submit
+    // 2) Comprobar que el email no está ya usado
+    if (estaUsadoEmail(email)) {
+      alert('Ese email ya está registrado. Usa otro o inicia sesión.');
       return;
-    } else {
-      añadirCuenta(email, password);
-      console.log(`Cuenta añadida`);
     }
-      */
+
+    // 3) Crear cuenta en memoria
+    añadirCuenta(email, password);
+    alert('Cuenta creada correctamente. Ahora inicia sesión.');
+
+    // 4) Redirigir al login
+    navigate('/login');
   };
 
   return (
@@ -96,6 +100,7 @@ function Register() {
                 required
               />
             </div>
+
             {/* Campo Confirmar Contraseña */}
             <div>
               <label
