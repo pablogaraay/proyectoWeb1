@@ -6,37 +6,43 @@
       "imagen": "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=600&h=400&fit=crop",
       "marca": "Omega",
       "color": "Azul",
-      "precio": 12990
+      "precio": 123
     },
     {
       "titulo": "Black Phantom Automatic",
       "descripcion": "Reloj automático de alta precisión con acabado negro satinado y brazalete metálico integrado. Su esfera minimalista juega con luces y sombras, ideal para quien quiere un reloj elegante pero con carácter contundente.",
-      "imagen": "https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=600&h=400&fit=crop"
+      "imagen": "https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=600&h=400&fit=crop",
+      "precio": 200
     },
     {
       "titulo": "Heritage Classic Gold Edition",
       "descripcion": "Pieza de inspiración clásica con caja dorada y correa de piel marrón chocolate. Esfera crema con numeración vintage y agujas tipo hoja, perfecta para eventos formales y coleccionistas de relojería tradicional.",
-      "imagen": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&h=400&fit=crop"
+      "imagen": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&h=400&fit=crop",
+      "precio": 300
     },
     {
       "titulo": "Rose Velvet Chrono",
       "descripcion": "Cronógrafo en acero rosado con correa de piel nude y esfera blanca nacarada. Combina un diseño delicado con funciones deportivas, pensada para quien busca un reloj de lujo versátil y muy actual.",
-      "imagen": "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=600&h=400&fit=crop"
+      "imagen": "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=600&h=400&fit=crop",
+      "precio": 400
     },
     {
       "titulo": "Carbon Racer GT",
       "descripcion": "Modelo inspirado en el mundo del motor, con caja robusta y detalles en rojo sobre fondo negro. Esfera multicapa, bisel taquimétrico y pulsadores sobredimensionados para transmitir sensación de potencia y velocidad.",
-      "imagen": "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?w=600&h=400&fit=crop"
+      "imagen": "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?w=600&h=400&fit=crop",
+      "precio": 500
     },
     {
       "titulo": "Midnight Collector Set",
       "descripcion": "Set de colección con varios relojes de inspiración nocturna, todos con esferas oscuras y detalles metálicos. Pensado para amantes de la relojería que buscan versatilidad sin renunciar a la estética premium.",
-      "imagen": "https://images.unsplash.com/photo-1609587312208-cea54be969e7?w=600&h=400&fit=crop"
+      "imagen": "https://images.unsplash.com/photo-1609587312208-cea54be969e7?w=600&h=400&fit=crop",
+      "precio": 600
     },
     {
       "titulo": "Urban Minimalist Automatic",
       "descripcion": "Reloj automático de diseño limpio con esfera blanca y correa azul petróleo. Combina un look urbano y contemporáneo con un movimiento mecánico visible a través del fondo, ideal para uso diario con un toque elegante.",
-      "imagen": "https://images.unsplash.com/photo-1611695434398-4f4b330623e6?w=600&h=400&fit=crop"
+      "imagen": "https://images.unsplash.com/photo-1611695434398-4f4b330623e6?w=600&h=400&fit=crop",
+      "precio": 1100
     }
   ],
   "noticias": [
