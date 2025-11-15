@@ -11,6 +11,7 @@ function CartaDesplegada({ carta, onClose }) {
   const navigate = useNavigate();
 
   const estaLogueado = esInvitado === INVITADO.NO;
+  const comentarioVacio = comentario.trim() === '';
 
   useEffect(() => {
     const guardado = JSON.parse(localStorage.getItem('valoraciones')) || {};
@@ -26,8 +27,12 @@ function CartaDesplegada({ carta, onClose }) {
       return;
     }
 
+    if (comentario.trim() === '') {
+      return;
+    }
+
     const guardado = JSON.parse(localStorage.getItem('valoraciones')) || {};
-    const nuevosComentarios = [...comentarios, comentario];
+    const nuevosComentarios = [...comentarios, comentario.trim()];
 
     guardado[carta.titulo] = {
       valoracion,
@@ -40,7 +45,7 @@ function CartaDesplegada({ carta, onClose }) {
   };
 
   const eliminarComentario = (index) => {
-    if (!estaLogueado) return; 
+    if (!estaLogueado) return;
 
     const guardado = JSON.parse(localStorage.getItem('valoraciones')) || {};
     const nuevosComentarios = comentarios.filter((_, i) => i !== index);
@@ -107,9 +112,11 @@ function CartaDesplegada({ carta, onClose }) {
         <button
           onClick={guardarDatos}
           className={`bg-indigo-600 text-white px-4 py-2 rounded-lg transition ${
-            estaLogueado ? 'hover:bg-indigo-700' : 'opacity-60 cursor-not-allowed'
+            estaLogueado && !comentarioVacio
+              ? 'hover:bg-indigo-700'
+              : 'opacity-60 cursor-not-allowed'
           }`}
-          disabled={!estaLogueado}
+          disabled={!estaLogueado || comentarioVacio}
         >
           Guardar
         </button>
