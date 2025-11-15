@@ -36,6 +36,7 @@ export function añadirCuenta(email, password) {
     usuario: email,
     contraseña: password,
   });
+  guardarCuentas(); 
 }
 
 export function setUsuarioActual(email) {
