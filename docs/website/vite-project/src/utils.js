@@ -36,7 +36,7 @@ export function añadirCuenta(email, password) {
     usuario: email,
     contraseña: password,
   });
-  guardarCuentas(); 
+  guardarCuentas();  //guardo en localstorage
 }
 
 export function setUsuarioActual(email) {
