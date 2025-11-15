@@ -7,6 +7,10 @@
     {
       "usuario": "alejandro",
       "contraseña": "1234"
+    },
+    {
+      "usuario": "jesus",
+      "contraseña": "1234"
     }
   ]
 }

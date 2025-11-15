@@ -22,7 +22,6 @@ function CartaDesplegada({ carta, onClose }) {
 
   const guardarDatos = () => {
     if (!estaLogueado) {
-      // Por seguridad extra: mandamos al login si intenta guardar
       navigate('/login');
       return;
     }
@@ -40,6 +39,21 @@ function CartaDesplegada({ carta, onClose }) {
     setComentario('');
   };
 
+  const eliminarComentario = (index) => {
+    if (!estaLogueado) return; 
+
+    const guardado = JSON.parse(localStorage.getItem('valoraciones')) || {};
+    const nuevosComentarios = comentarios.filter((_, i) => i !== index);
+
+    guardado[carta.titulo] = {
+      valoracion,
+      comentarios: nuevosComentarios,
+    };
+
+    localStorage.setItem('valoraciones', JSON.stringify(guardado));
+    setComentarios(nuevosComentarios);
+  };
+
   return (
     <div className="fixed inset-0 bg-black/50 bg-opacity-60 flex justify-center items-center z-50">
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 w-full max-w-lg">
@@ -55,39 +69,39 @@ function CartaDesplegada({ carta, onClose }) {
 
         <label className="block text-gray-700 font-semibold">Valoración:</label>
         <select
-        value={valoracion}
-        onChange={(e) => setValoracion(Number(e.target.value))}
-        className={`border rounded-lg p-2 mb-3 w-full dark:bg-gray-700 dark:text-white ${
+          value={valoracion}
+          onChange={(e) => setValoracion(Number(e.target.value))}
+          className={`border rounded-lg p-2 mb-3 w-full dark:bg-gray-700 dark:text-white ${
             !estaLogueado ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-        disabled={!estaLogueado}          // 👈 también bloqueamos la valoración
+          }`}
+          disabled={!estaLogueado}
         >
-        <option value={0}>Sin valorar</option>
-        {[1, 2, 3, 4, 5].map((n) => (
+          <option value={0}>Sin valorar</option>
+          {[1, 2, 3, 4, 5].map((n) => (
             <option key={n} value={n}>
-            {n} ⭐
+              {n} ⭐
             </option>
-        ))}
+          ))}
         </select>
 
         <textarea
-        value={comentario}
-        onChange={(e) => setComentario(e.target.value)}
-        placeholder={
+          value={comentario}
+          onChange={(e) => setComentario(e.target.value)}
+          placeholder={
             estaLogueado
-            ? 'Escribe un comentario...'
-            : 'Debes iniciar sesión para comentar.'
-        }
-        className={`w-full border rounded-lg p-2 mb-3 dark:bg-gray-700 dark:text-white ${
+              ? 'Escribe un comentario...'
+              : 'Debes iniciar sesión para comentar.'
+          }
+          className={`w-full border rounded-lg p-2 mb-3 dark:bg-gray-700 dark:text-white ${
             !estaLogueado ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-        disabled={!estaLogueado}
+          }`}
+          disabled={!estaLogueado}
         />
 
         {!estaLogueado && (
-        <p className="text-sm text-red-500 mb-2">
+          <p className="text-sm text-red-500 mb-2">
             Para dejar un comentario o valoración debes estar registrado e iniciar sesión.
-        </p>
+          </p>
         )}
 
         <button
@@ -112,10 +126,21 @@ function CartaDesplegada({ carta, onClose }) {
           {comentarios.length === 0 ? (
             <p className="text-gray-500">Sin comentarios aún.</p>
           ) : (
-            <ul className="list-disc pl-4">
+            <ul className="space-y-1">
               {comentarios.map((c, i) => (
-                <li key={i} className="text-gray-700 dark:text-gray-300">
-                  {c}
+                <li
+                  key={i}
+                  className="flex justify-between items-center text-gray-700 dark:text-gray-300"
+                >
+                  <span>{c}</span>
+                  {estaLogueado && (
+                    <button
+                      onClick={() => eliminarComentario(i)}
+                      className="ml-2 text-xs text-red-500 hover:text-red-700"
+                    >
+                      Eliminar
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
