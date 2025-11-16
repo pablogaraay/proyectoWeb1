@@ -13,6 +13,8 @@ db.serialize(() => {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       email TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
+      display_name TEXT,
+      avatar_url TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
