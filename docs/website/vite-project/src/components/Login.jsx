@@ -1,7 +1,7 @@
-// src/components/Login.jsx
 import { useState } from 'react';
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../config.js';
+import { setUsuarioActual } from '../utils.js';
 
 function Login() {
   const { handleInvitado } = useOutletContext();
@@ -32,9 +32,8 @@ function Login() {
         setError(data.error || 'Error al iniciar sesión');
         handleInvitado(false);      // sigue siendo invitado
       } else {
-        // Guardamos token y email para la sesión
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('usuarioEmail', data.user.email);
+        // Guardamos token y email para la sesión de forma centralizada
+        setUsuarioActual(data.user.email, data.token);
 
         handleInvitado(true);       // ya no es invitado
         navigate('/catalogo');
