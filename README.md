@@ -4,3 +4,9 @@
 - Jesús Alfonso Marín Sánchez
 - Alejandro Lillo Rodríguez
 - Juan Cordero Pascual
+
+## Para levantar el frontend:
+proyectoWeb1\docs\website\vite-project> npm run dev
+
+## Para levantar el backend:
+proyectoWeb1\server> node .\index.js
