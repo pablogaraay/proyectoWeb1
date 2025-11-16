@@ -237,7 +237,7 @@ function Account() {
             type="text"
             value={editName}
             onChange={(e) => setEditName(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-slate-900 dark:bg-white dark:text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Tu nombre visible"
           />
         </div>
@@ -251,7 +251,7 @@ function Account() {
             type="text"
             value={editAvatar}
             onChange={(e) => setEditAvatar(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-slate-900 dark:bg-white dark:text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="https://..."
           />
           <p className="text-xs text-slate-500 mt-1">
