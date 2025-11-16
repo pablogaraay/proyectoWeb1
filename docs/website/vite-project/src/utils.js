@@ -1,12 +1,9 @@
+// src/utils.js
 import info from './info.json';
 
-// Array en memoria que se perderá al refrescar la página
+// --------- (opcional) cosas antiguas ---------
 let cuentasEnMemoria = [...info.cuentas];
 
-// Usuario actual en memoria (también se pierde al refrescar)
-let usuarioActual = null;
-
-// Función auxiliar para obtener todas las cuentas
 function obtenerTodasLasCuentas() {
   return cuentasEnMemoria;
 }
@@ -31,24 +28,30 @@ export function estaUsadoEmail(email) {
   return false;
 }
 
-export function añadirCuenta(email, password) {
-  cuentasEnMemoria.push({
-    usuario: email,
-    contraseña: password,
-  });
-  guardarCuentas();  //guardo en localstorage
+// ============== NUEVO: gestión de usuario logueado ==============
+
+// Guardar usuario actual (por si quieres usarlo desde el login)
+export function setUsuarioActual(email, token) {
+  if (email) {
+    localStorage.setItem('usuarioEmail', email);
+  }
+  if (token) {
+    localStorage.setItem('token', token);
+  }
 }
 
-export function setUsuarioActual(email) {
-  usuarioActual = { usuario: email };
-}
-
+// Obtener usuario actual desde localStorage
 export function getUsuarioActual() {
-  return usuarioActual;
+  const email = localStorage.getItem('usuarioEmail');
+  if (!email) {
+    return null;
+  }
+  // Lo devolvemos con la misma forma que esperas en Account.jsx
+  return { usuario: email };
 }
 
+// Limpiar sesión de usuario
 export function limpiarUsuarioActual() {
-  // si no lo guardas en localStorage, con esto basta:
-  usuarioActual = null;
-  localStorage.removeItem('usuarioActual');
+  localStorage.removeItem('usuarioEmail');
+  localStorage.removeItem('token');
 }

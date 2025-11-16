@@ -1,44 +1,60 @@
+// src/components/Login.jsx
+import { useState } from 'react';
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
-import { existeCuenta, setUsuarioActual } from '../utils.js';
+import { API_BASE_URL } from '../config.js';
 
 function Login() {
   const { handleInvitado } = useOutletContext();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const [error, setError] = useState('');
+  const [cargando, setCargando] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setCargando(true);
+
     const formData = new FormData(e.target);
     const email = formData.get('email');
     const password = formData.get('password');
 
-    const loginOk = existeCuenta(email, password);
+    try {
+      const resp = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-    console.log(`Email: ${email} y contraseña: ${password}`);
-    console.log(`Return de validacion: ${loginOk}`);
+      const data = await resp.json();
 
-    // Esto actualizará esInvitado en App.jsx
-    handleInvitado(loginOk);
+      if (!resp.ok) {
+        setError(data.error || 'Error al iniciar sesión');
+        handleInvitado(false);      // sigue siendo invitado
+      } else {
+        // Guardamos token y email para la sesión
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('usuarioEmail', data.user.email);
 
-    if (loginOk) {
-      // Guardamos quién es el usuario actual
-      setUsuarioActual(email);
-
-      // Si el login es correcto, lo mando al catálogo
-      navigate('/catalogo');
-    } else {
-      alert('Usuario o contraseña incorrectos');
+        handleInvitado(true);       // ya no es invitado
+        navigate('/catalogo');
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Error de conexión con el servidor.');
+      handleInvitado(false);
+    } finally {
+      setCargando(false);
     }
   };
 
   return (
     <div className='min-h-screen bg-slate-50 flex items-start justify-center px-4 pt-2 pb-8'>
       <div className='bg-slate-50 rounded-3xl shadow-2xl p-8 w-full max-w-md border border-slate-200'>
-        {/* Título */}
         <h1 className='text-4xl font-bold text-slate-800 text-center mb-6'>
           Login
         </h1>
 
-        {/* Icono */}
         <div className='flex justify-center mb-6'>
           <div className='w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center'>
             <svg
@@ -57,7 +73,6 @@ function Login() {
           </div>
         </div>
 
-        {/* Formulario */}
         <form onSubmit={handleSubmit} className='space-y-4'>
           <div>
             <label
@@ -93,11 +108,16 @@ function Login() {
             />
           </div>
 
+          {error && (
+            <p className='text-red-500 text-sm text-center'>{error}</p>
+          )}
+
           <button
             type='submit'
-            className='w-full py-3 bg-indigo-600 text-white font-semibold text-lg rounded-xl hover:bg-indigo-700 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl'
+            disabled={cargando}
+            className='w-full py-3 bg-indigo-600 text-white font-semibold text-lg rounded-xl hover:bg-indigo-700 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-60'
           >
-            Acceder
+            {cargando ? 'Accediendo...' : 'Acceder'}
           </button>
         </form>
 
