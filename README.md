@@ -10,3 +10,6 @@ proyectoWeb1\docs\website\vite-project> npm run dev
 
 ## Para levantar el backend:
 proyectoWeb1\server> node .\index.js
+
+## BBDD
+SQLite dentro de /server.
