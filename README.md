@@ -6,7 +6,8 @@
 - Juan Cordero Pascual
 
 ## Para levantar el frontend:
-proyectoWeb1\docs\website\vite-project> npm run dev
+En windows: proyectoWeb1\docs\website\vite-project> npm run dev
+En Mac: proyectoWeb1\docs\website\vite-project> npm run devMac
 
 ## Para levantar el backend:
 proyectoWeb1\server> node .\index.js
