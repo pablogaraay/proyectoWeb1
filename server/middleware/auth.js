@@ -37,4 +37,12 @@ function requireAuth(req, res, next) {
   }
 }
 
-module.exports = { requireAuth };
+// Middleware para requerir rol de soporte/admin
+function requireSupport(req, res, next) {
+  if (!req.user || req.user.role !== 'support') {
+    return res.status(403).json({ error: 'Acceso denegado. Se requiere rol de soporte.' });
+  }
+  next();
+}
+
+module.exports = { requireAuth, requireSupport };

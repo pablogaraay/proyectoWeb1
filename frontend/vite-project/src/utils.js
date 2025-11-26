@@ -54,6 +54,7 @@ export function getUsuarioActual() {
 export function limpiarUsuarioActual() {
   localStorage.removeItem('usuarioEmail');
   localStorage.removeItem('token');
+  localStorage.removeItem('user');
   localStorage.removeItem('userRole');
   localStorage.removeItem('supportChatId');
   localStorage.removeItem('supportClientName');

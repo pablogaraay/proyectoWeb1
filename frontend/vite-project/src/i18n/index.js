@@ -17,7 +17,7 @@ i18n
     lng: savedLanguage,
     fallbackLng: 'es',
     interpolation: {
-      escapeValue: false // React ya escapa por defecto
+      escapeValue: false
     }
   });
 

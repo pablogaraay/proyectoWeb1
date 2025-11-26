@@ -6,7 +6,8 @@
     "about": "Sobre Nosotros",
     "account": "Mi Cuenta",
     "login": "Iniciar Sesión",
-    "register": "Registrarse"
+    "register": "Registrarse",
+    "admin": "Admin"
   },
   "home": {
     "welcome": "Bienvenido a nuestro sitio web",
@@ -23,6 +24,7 @@
     "minPrice": "Precio mínimo (€)",
     "maxPrice": "Precio máximo (€)",
     "clearFilters": "Limpiar filtros",
+    "filterProducts": "Filtrar Productos",
     "noProducts": "No hay productos que coincidan con los filtros"
   },
   "product": {
@@ -152,6 +154,31 @@
     "chatWillClose": "El chat se cerrará automáticamente",
     "waitingAgent": "Esperando a un agente...",
     "isTyping": "está escribiendo..."
+  },
+  "admin": {
+    "title": "Panel de Administración",
+    "totalUsers": "Total usuarios",
+    "clients": "Clientes",
+    "supportAgents": "Agentes de soporte",
+    "avgRating": "Valoración media",
+    "searchUsers": "Buscar usuarios...",
+    "allRoles": "Todos los roles",
+    "roleClient": "Cliente",
+    "roleSupport": "Soporte",
+    "email": "Email",
+    "displayName": "Nombre",
+    "role": "Rol",
+    "createdAt": "Fecha registro",
+    "actions": "Acciones",
+    "changePassword": "Cambiar contraseña",
+    "changePasswordFor": "Cambiar contraseña de",
+    "newPassword": "Nueva contraseña",
+    "passwordMinLength": "La contraseña debe tener al menos 6 caracteres",
+    "passwordChanged": "Contraseña cambiada correctamente",
+    "userUpdated": "Usuario actualizado correctamente",
+    "userDeleted": "Usuario eliminado correctamente",
+    "confirmDelete": "¿Estás seguro de que quieres eliminar este usuario? Esta acción no se puede deshacer.",
+    "noUsers": "No se encontraron usuarios"
   },
   "common": {
     "loading": "Cargando...",

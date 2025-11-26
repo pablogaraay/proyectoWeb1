@@ -6,6 +6,7 @@ const { Server } = require('socket.io');
 
 const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
+const adminRouter = require('./routes/admin');
 const setupChatHandlers = require('./socket/chatHandler');
 
 const app = express();
@@ -35,6 +36,7 @@ app.use(express.json());
 // Rutas nuevas
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/admin', adminRouter);
 
 // Manejo básico de errores
 app.use((err, req, res, next) => {

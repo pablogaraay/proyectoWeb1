@@ -10,6 +10,7 @@ import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import Catalogo from './components/Catalogo.jsx';
 import Noticias from './components/Noticias.jsx';
+import AdminPanel from './components/AdminPanel.jsx';
 import './i18n';
 
 createRoot(document.getElementById('root')).render(
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='noticias' element={<Noticias />} />
           <Route path='catalogo' element={<Catalogo />} />
           <Route path='register' element={<Register />} />
+          <Route path='admin' element={<AdminPanel />} />
         </Route>
       </Routes>
     </BrowserRouter>

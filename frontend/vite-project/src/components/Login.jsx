@@ -37,7 +37,8 @@ function Login() {
         // Guardamos token y email para la sesión de forma centralizada
         setUsuarioActual(data.user.email, data.token);
         
-        // Guardar el rol del usuario
+        // Guardar el usuario completo (incluyendo rol)
+        localStorage.setItem('user', JSON.stringify(data.user));
         localStorage.setItem('userRole', data.user.role || 'client');
 
         handleInvitado(true);       // ya no es invitado
