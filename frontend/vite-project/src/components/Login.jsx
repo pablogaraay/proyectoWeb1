@@ -34,6 +34,9 @@ function Login() {
       } else {
         // Guardamos token y email para la sesión de forma centralizada
         setUsuarioActual(data.user.email, data.token);
+        
+        // Guardar el rol del usuario
+        localStorage.setItem('userRole', data.user.role || 'client');
 
         handleInvitado(true);       // ya no es invitado
         navigate('/catalogo');

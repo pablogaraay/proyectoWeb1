@@ -6,6 +6,10 @@ const path = require('path');
 const dbPath = path.join(__dirname, 'database.sqlite');
 const db = new sqlite3.Database(dbPath);
 
+// Configurar SQLite para mejor concurrencia
+db.run('PRAGMA busy_timeout = 5000'); // Esperar 5 segundos si está bloqueada
+db.run('PRAGMA journal_mode = WAL');  // Write-Ahead Logging para mejor concurrencia
+
 // Crear tablas si no existen
 db.serialize(() => {
   db.run(`
@@ -15,7 +19,37 @@ db.serialize(() => {
       password_hash TEXT NOT NULL,
       display_name TEXT,
       avatar_url TEXT,
+      role TEXT DEFAULT 'client',
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  // Tabla de chats de soporte
+  db.run(`
+    CREATE TABLE IF NOT EXISTS support_chats (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      client_id INTEGER,
+      client_name TEXT NOT NULL,
+      support_agent_id INTEGER,
+      status TEXT DEFAULT 'pending',
+      rating INTEGER,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      closed_at DATETIME,
+      FOREIGN KEY (client_id) REFERENCES users(id),
+      FOREIGN KEY (support_agent_id) REFERENCES users(id)
+    )
+  `);
+
+  // Tabla de mensajes del chat
+  db.run(`
+    CREATE TABLE IF NOT EXISTS chat_messages (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      chat_id INTEGER NOT NULL,
+      sender_type TEXT NOT NULL,
+      sender_name TEXT NOT NULL,
+      message TEXT NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (chat_id) REFERENCES support_chats(id)
     )
   `);
 });

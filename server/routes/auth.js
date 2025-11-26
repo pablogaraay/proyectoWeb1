@@ -92,7 +92,7 @@ router.post('/login', (req, res) => {
         return res.status(401).json({ error: 'Credenciales inválidas' });
       }
 
-      const payload = { id: user.id, email: user.email };
+      const payload = { id: user.id, email: user.email, role: user.role || 'client' };
       const token = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
       res.json({
@@ -102,6 +102,7 @@ router.post('/login', (req, res) => {
           email: user.email,
           display_name: user.display_name,
           avatar_url: user.avatar_url,
+          role: user.role || 'client',
         },
       });
     });
