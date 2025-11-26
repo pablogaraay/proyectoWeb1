@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import data from '../data/contenidoCartas.json';
 import CatalogoCard from './cards/CatalogoCard';
 import BotonBuscador from './botones/BotonBuscador.jsx';
@@ -16,6 +17,7 @@ const COLORES_DISPONIBLES = [
 ];
 
 function Catalogo() {
+  const { t } = useTranslation();
   const [mostrarBuscador, setMostrarBuscador] = useState(BUSCADOR.INEXISTENTE);
   const [filtrar, setFiltrar] = useState('');
   const [abrir, setAbrircarta] = useState(null);
@@ -62,7 +64,7 @@ function Catalogo() {
     <div className="p-8">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-dark">
-          Catálogo de Productos
+          {t('catalog.title')}
         </h1>
         <BotonBuscador onFiltrar={onFiltrar} />
       </div>
@@ -76,14 +78,14 @@ function Catalogo() {
         {/* Marca */}
         <div>
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">
-            Marca
+            {t('catalog.brand')}
           </label>
           <select
             value={marcaFiltro}
             onChange={(e) => setMarcaFiltro(e.target.value)}
             className="border rounded-lg px-3 py-2 dark:bg-gray-800 dark:text-white"
           >
-            <option value="">Todas</option>
+            <option value="">{t('catalog.allBrands')}</option>
             {MARCAS_DISPONIBLES.map((marca) => (
               <option key={marca} value={marca}>
                 {marca}
@@ -95,14 +97,14 @@ function Catalogo() {
         {/* Color */}
         <div>
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">
-            Color principal
+            {t('catalog.color')}
           </label>
           <select
             value={colorFiltro}
             onChange={(e) => setColorFiltro(e.target.value)}
             className="border rounded-lg px-3 py-2 dark:bg-gray-800 dark:text-white"
           >
-            <option value="">Todos</option>
+            <option value="">{t('catalog.allColors')}</option>
             {COLORES_DISPONIBLES.map((color) => (
               <option key={color} value={color}>
                 {color}
@@ -114,7 +116,7 @@ function Catalogo() {
         {/* Precio mínimo */}
         <div>
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">
-            Precio mínimo (€)
+            {t('catalog.minPrice')}
           </label>
           <input
             type="number"
@@ -128,7 +130,7 @@ function Catalogo() {
         {/* Precio máximo */}
         <div>
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">
-            Precio máximo (€)
+            {t('catalog.maxPrice')}
           </label>
           <input
             type="number"
@@ -149,21 +151,27 @@ function Catalogo() {
           }}
           className="ml-auto px-4 py-2 rounded-lg bg-slate-200 text-slate-800 hover:bg-slate-300 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600"
         >
-          Limpiar filtros
+          {t('catalog.clearFilters')}
         </button>
       </div>
 
       {/* Grid de cartas */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {cartasFiltradas.map((carta, index) => (
-          <CatalogoCard
-            key={index}
-            titulo={carta.titulo}
-            descripcion={carta.descripcion}
-            imagen={carta.imagen}
-            onClick={() => setAbrircarta(carta)}
-          />
-        ))}
+        {cartasFiltradas.length === 0 ? (
+          <div className="col-span-full text-center py-12 text-gray-500">
+            <p>{t('catalog.noProducts')}</p>
+          </div>
+        ) : (
+          cartasFiltradas.map((carta, index) => (
+            <CatalogoCard
+              key={index}
+              titulo={carta.titulo}
+              descripcion={carta.descripcion}
+              imagen={carta.imagen}
+              onClick={() => setAbrircarta(carta)}
+            />
+          ))
+        )}
       </div>
 
       {abrir && (

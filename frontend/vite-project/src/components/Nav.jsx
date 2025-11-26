@@ -4,6 +4,7 @@ import BotonAboutUs from './botones/BotonAboutUs.jsx';
 import BotonIniciarSesion from './botones/BotonIniciarSesion.jsx';
 import BotonNoticias from './botones/BotonNoticias.jsx';
 import BotonPerfil from './botones/BotonPerfil.jsx';
+import LanguageSelector from './LanguageSelector.jsx';
 import { INVITADO } from '../constantes.js';
 import { useLocation } from 'react-router-dom';
 
@@ -25,8 +26,9 @@ function Nav({ esInvitado }) {
           <BotonAboutUs isActive={location.pathname === '/aboutus'} />
         </div>
 
-        {/* Botón de iniciar sesión a la derecha - pegado al borde */}
-        <div className='absolute right-6'>
+        {/* Selector de idioma y botón de sesión a la derecha */}
+        <div className='absolute right-6 flex items-center gap-4'>
+          <LanguageSelector />
           {esInvitado === INVITADO.SI ? (
             <BotonIniciarSesion />
           ) : (

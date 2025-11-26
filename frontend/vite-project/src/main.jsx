@@ -10,6 +10,7 @@ import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import Catalogo from './components/Catalogo.jsx';
 import Noticias from './components/Noticias.jsx';
+import './i18n';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

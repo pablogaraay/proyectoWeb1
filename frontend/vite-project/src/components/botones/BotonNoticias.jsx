@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function BotonNoticias({ isActive }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -15,7 +17,7 @@ function BotonNoticias({ isActive }) {
           navigate('/noticias');
         }}
       >
-        Noticias
+        {t('nav.news')}
         <span
           className={`absolute bottom-0 left-0 h-0.5 bg-indigo-600 transition-all duration-300 ${
             isActive ? 'w-full' : 'w-0 group-hover:w-full'

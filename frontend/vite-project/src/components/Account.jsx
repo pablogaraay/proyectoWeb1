@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
 import { INVITADO } from '../constantes';
 import { limpiarUsuarioActual } from '../utils.js';
 import { API_BASE_URL } from '../config.js';
 
 function Account() {
+  const { t } = useTranslation();
   const { esInvitado, handleInvitado } = useOutletContext();
   const navigate = useNavigate();
 
@@ -106,9 +108,7 @@ function Account() {
   };
 
   const handleDeleteAccount = async () => {
-    const confirmado = window.confirm(
-      '⚠️ Esta acción eliminará tu cuenta y todos tus datos. ¿Seguro que quieres continuar?'
-    );
+    const confirmado = window.confirm(t('account.deleteConfirm'));
     if (!confirmado) return;
 
     try {
@@ -129,7 +129,7 @@ function Account() {
       limpiarUsuarioActual();
       handleInvitado(false);
       navigate('/');
-      alert('Tu cuenta ha sido eliminada correctamente.');
+      alert(t('account.deleted'));
     } catch (err) {
       console.error(err);
       setError(err.message);
@@ -138,28 +138,28 @@ function Account() {
 
   // 🔹 AHORA vienen los returns condicionales (sin hooks nuevos debajo)
 
-  // Si es invitado o no hay token, vista de “debes iniciar sesión”
+  // Si es invitado o no hay token, vista de "debes iniciar sesión"
   if (esInvitado === INVITADO.SI || !token) {
     return (
       <div className="max-w-md mx-auto mt-10 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
         <h2 className="text-2xl font-bold mb-4 text-center text-slate-800 dark:text-white">
-          Perfil
+          {t('account.profile')}
         </h2>
         <p className="text-center text-slate-600 dark:text-slate-300 mb-4">
-          Debes iniciar sesión para ver tu perfil.
+          {t('account.loginRequired')}
         </p>
         <div className="flex justify-center gap-3">
           <Link
             to="/login"
             className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700"
           >
-            Iniciar sesión
+            {t('account.loginButton')}
           </Link>
           <Link
             to="/register"
             className="px-4 py-2 rounded-lg bg-slate-200 text-slate-800 hover:bg-slate-300"
           >
-            Registrarme
+            {t('account.registerButton')}
           </Link>
         </div>
       </div>
@@ -170,7 +170,7 @@ function Account() {
   if (loading && !profile) {
     return (
       <div className="max-w-md mx-auto mt-10 text-center text-slate-700 dark:text-slate-200">
-        Cargando perfil...
+        {t('account.loading')}
       </div>
     );
   }
@@ -180,7 +180,7 @@ function Account() {
     return (
       <div className="max-w-md mx-auto mt-10 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
         <h2 className="text-2xl font-bold mb-4 text-center text-slate-800 dark:text-white">
-          Error al cargar el perfil
+          {t('account.errorTitle')}
         </h2>
         <p className="text-center text-red-500 mb-4">{error}</p>
         <div className="flex justify-center gap-3">
@@ -188,7 +188,7 @@ function Account() {
             to="/login"
             className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700"
           >
-            Volver a iniciar sesión
+            {t('account.backToLogin')}
           </Link>
         </div>
       </div>
@@ -199,7 +199,7 @@ function Account() {
   return (
     <div className="max-w-md mx-auto mt-10 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-center text-slate-800 dark:text-white">
-        Mi perfil
+        {t('account.title')}
       </h2>
 
       {/* Avatar */}
@@ -218,7 +218,7 @@ function Account() {
         {/* Email (solo lectura) */}
         <div>
           <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-1">
-            Email
+            {t('account.email')}
           </label>
           <input
             type="text"
@@ -231,21 +231,21 @@ function Account() {
         {/* Nombre de perfil */}
         <div>
           <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-1">
-            Nombre de perfil
+            {t('account.displayName')}
           </label>
           <input
             type="text"
             value={editName}
             onChange={(e) => setEditName(e.target.value)}
             className="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-slate-900 dark:bg-white dark:text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Tu nombre visible"
+            placeholder={t('account.displayNamePlaceholder')}
           />
         </div>
 
         {/* URL de la foto */}
         <div>
           <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-1">
-            URL de la foto de perfil
+            {t('account.avatarUrl')}
           </label>
           <input
             type="text"
@@ -255,8 +255,7 @@ function Account() {
             placeholder="https://..."
           />
           <p className="text-xs text-slate-500 mt-1">
-            (Para simplificar, usamos una URL de imagen; subir ficheros sería
-            otro endpoint.)
+            {t('account.avatarNote')}
           </p>
         </div>
 
@@ -272,7 +271,7 @@ function Account() {
           disabled={saving}
           className="w-full py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-60"
         >
-          {saving ? 'Guardando...' : 'Guardar cambios'}
+          {saving ? t('account.saving') : t('account.save')}
         </button>
       </form>
 
@@ -282,14 +281,14 @@ function Account() {
         onClick={handleLogout}
         className="w-full py-2 mb-3 bg-slate-200 text-slate-800 rounded-lg hover:bg-slate-300"
       >
-        Cerrar sesión
+        {t('account.logout')}
       </button>
 
       <button
         onClick={handleDeleteAccount}
         className="w-full py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
       >
-        Eliminar mi cuenta
+        {t('account.deleteAccount')}
       </button>
     </div>
   );

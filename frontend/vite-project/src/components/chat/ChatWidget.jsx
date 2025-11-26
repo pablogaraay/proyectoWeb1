@@ -1,5 +1,6 @@
 // src/components/chat/ChatWidget.jsx
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSocket } from '../../hooks/useSocket';
 import { useNavigate } from 'react-router-dom';
 import { INVITADO } from '../../constantes';
@@ -9,6 +10,7 @@ import { INVITADO } from '../../constantes';
  * Aparece en la esquina inferior derecha
  */
 function ChatWidget({ esInvitado }) {
+  const { t } = useTranslation();
   const { isConnected, connectionError, emit, on, off } = useSocket();
   const navigate = useNavigate();
   
@@ -51,7 +53,7 @@ function ChatWidget({ esInvitado }) {
       setMessages(prev => [...prev, {
         id: Date.now(),
         senderType: 'system',
-        message: `${data.agentName} se ha unido al chat. Te ayudará con tu consulta.`,
+        message: `${data.agentName} ${t('chat.agentJoined')}`,
         createdAt: new Date().toISOString()
       }]);
     };
@@ -61,7 +63,7 @@ function ChatWidget({ esInvitado }) {
       setMessages(prev => [...prev, {
         id: Date.now(),
         senderType: 'system',
-        message: 'El chat ha sido cerrado. Por favor, valora la atención recibida.',
+        message: t('chat.rateExperience'),
         createdAt: new Date().toISOString()
       }]);
     };
@@ -257,7 +259,7 @@ function ChatWidget({ esInvitado }) {
         className={`w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${
           isOpen ? 'scale-0 opacity-0' : 'scale-100 opacity-100'
         }`}
-        title="Abrir chat de soporte"
+        title={t('chat.openSupport')}
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -273,9 +275,13 @@ function ChatWidget({ esInvitado }) {
           {/* Header */}
           <div className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center">
             <div>
-              <h3 className="font-semibold">Soporte en vivo</h3>
+              <h3 className="font-semibold">{t('chat.liveSupport')}</h3>
               <p className="text-xs text-blue-100">
-                {isConnected ? (agentName ? `Atendido por ${agentName}` : 'Conectado') : 'Conectando...'}
+                {isConnected
+                  ? (agentName
+                      ? `${t('chat.attendedBy')} ${agentName}`
+                      : t('chat.connected'))
+                  : t('chat.connecting')}
               </p>
             </div>
             <button
@@ -314,8 +320,8 @@ function ChatWidget({ esInvitado }) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                   </div>
-                  <h4 className="text-lg font-semibold text-gray-800">Inicia sesión</h4>
-                  <p className="text-gray-600 text-sm mt-1">Para contactar con soporte necesitas una cuenta</p>
+                  <h4 className="text-lg font-semibold text-gray-800">{t('chat.loginToChat')}</h4>
+                  <p className="text-gray-600 text-sm mt-1">{t('chat.registerToChat')}</p>
                 </div>
                 
                 <div className="space-y-3">
@@ -323,13 +329,13 @@ function ChatWidget({ esInvitado }) {
                     onClick={() => { setIsOpen(false); navigate('/login'); }}
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition-colors"
                   >
-                    Iniciar sesión
+                    {t('chat.goToLogin')}
                   </button>
                   <button
                     onClick={() => { setIsOpen(false); navigate('/register'); }}
                     className="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 rounded-lg font-medium transition-colors"
                   >
-                    Crear cuenta
+                    {t('chat.goToRegister')}
                   </button>
                 </div>
               </div>
@@ -344,8 +350,8 @@ function ChatWidget({ esInvitado }) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                     </svg>
                   </div>
-                  <h4 className="text-lg font-semibold text-gray-800">¡Hola! 👋</h4>
-                  <p className="text-gray-600 text-sm mt-1">¿En qué podemos ayudarte?</p>
+                  <h4 className="text-lg font-semibold text-gray-800">{t('chat.needHelp')}</h4>
+                  <p className="text-gray-600 text-sm mt-1">👋</p>
                 </div>
                 
                 <div className="space-y-3">
@@ -353,7 +359,7 @@ function ChatWidget({ esInvitado }) {
                     type="text"
                     value={clientName}
                     onChange={(e) => setClientName(e.target.value)}
-                    placeholder="Tu nombre"
+                    placeholder={t('chat.yourName')}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                     onKeyPress={(e) => e.key === 'Enter' && startChat()}
                   />
@@ -362,7 +368,7 @@ function ChatWidget({ esInvitado }) {
                     disabled={isStartingChat || !isConnected}
                     className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white py-2 rounded-lg font-medium transition-colors"
                   >
-                    {isStartingChat ? 'Iniciando...' : 'Iniciar chat'}
+                    {isStartingChat ? t('common.loading') : t('chat.startChat')}
                   </button>
                 </div>
               </div>
@@ -402,7 +408,7 @@ function ChatWidget({ esInvitado }) {
                   <div className="flex justify-start">
                     <div className="bg-gray-200 text-gray-600 px-4 py-2 rounded-2xl rounded-bl-md">
                       <div className="flex items-center gap-1">
-                        <span className="text-xs">{typingUser} está escribiendo</span>
+                        <span className="text-xs">{typingUser} {t('chat.isTyping')}</span>
                         <span className="flex gap-1">
                           <span className="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
                           <span className="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
@@ -421,14 +427,14 @@ function ChatWidget({ esInvitado }) {
             {chatStatus === 'awaiting_rating' && (
               <div className="mt-6 p-4 bg-gray-50 rounded-lg">
                 <p className="text-center text-gray-700 font-medium mb-2">
-                  ¿Cómo valorarías la atención recibida?
+                  {t('chat.rateExperience')}
                 </p>
                 {renderStars()}
                 <button
                   onClick={closeWithoutRating}
                   className="w-full text-gray-500 text-sm hover:text-gray-700 mt-2"
                 >
-                  Cerrar sin valorar
+                  {t('common.close')}
                 </button>
               </div>
             )}
@@ -438,8 +444,8 @@ function ChatWidget({ esInvitado }) {
               <div className="h-full flex items-center justify-center">
                 <div className="text-center">
                   <div className="text-4xl mb-2">✅</div>
-                  <p className="text-gray-700 font-medium">¡Gracias por tu valoración!</p>
-                  <p className="text-gray-500 text-sm">El chat se cerrará automáticamente</p>
+                  <p className="text-gray-700 font-medium">{t('chat.thankYou')}</p>
+                  <p className="text-gray-500 text-sm">{t('chat.chatWillClose')}</p>
                 </div>
               </div>
             )}
@@ -483,7 +489,7 @@ function ChatWidget({ esInvitado }) {
                     type="text"
                     value={inputMessage}
                     onChange={handleTyping}
-                    placeholder="Escribe tu mensaje..."
+                    placeholder={t('chat.writeMessage')}
                     className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm"
                   />
                   <button
@@ -503,7 +509,7 @@ function ChatWidget({ esInvitado }) {
                   onClick={closeWithoutRating}
                   className="w-full text-red-500 hover:text-red-600 text-sm py-1 transition-colors"
                 >
-                  Finalizar chat
+                  {t('chat.endChat')}
                 </button>
               </div>
             </div>

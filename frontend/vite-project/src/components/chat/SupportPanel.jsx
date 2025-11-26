@@ -1,5 +1,6 @@
 // src/components/chat/SupportPanel.jsx
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSocket } from '../../hooks/useSocket';
 
 /**
@@ -7,6 +8,7 @@ import { useSocket } from '../../hooks/useSocket';
  * Muestra lista de chats pendientes y permite responder
  */
 function SupportPanel() {
+  const { t } = useTranslation();
   const { isConnected, connectionError, emit, on, off } = useSocket();
   
   const [isOpen, setIsOpen] = useState(false);
@@ -374,10 +376,10 @@ function SupportPanel() {
   // Obtener texto del estado
   const getStatusText = (status) => {
     switch (status) {
-      case 'available': return 'Disponible';
-      case 'busy': return 'Ocupado';
-      case 'away': return 'Ausente';
-      default: return 'Desconocido';
+      case 'available': return t('chat.available');
+      case 'busy': return t('chat.busy');
+      case 'away': return t('chat.away');
+      default: return status;
     }
   };
 
@@ -428,14 +430,14 @@ function SupportPanel() {
                 )}
                 <div>
                   <h3 className="font-semibold">
-                    {activeChat ? `Chat con ${activeChat.client_name}` : viewingHistoryChat ? `Chat con ${viewingHistoryChat.client_name}` : showHistory ? 'Historial' : 'Panel de Soporte'}
+                    {activeChat ? `${t('chat.chatWith')} ${activeChat.client_name}` : viewingHistoryChat ? `${t('chat.chatWith')} ${viewingHistoryChat.client_name}` : showHistory ? t('chat.history') : t('chat.supportPanel')}
                   </h3>
                   <p className="text-xs text-green-100">
                     {viewingHistoryChat 
-                      ? 'Chat archivado (solo lectura)' 
+                      ? t('chat.archivedChat') 
                       : isConnected 
-                        ? (isJoined ? `${pendingCount} chats pendientes` : 'Conectado') 
-                        : 'Conectando...'}
+                        ? (isJoined ? `${pendingCount} ${t('chat.pendingChats')}` : t('chat.connected')) 
+                        : t('chat.connecting')}
                   </p>
                 </div>
               </div>
@@ -476,13 +478,13 @@ function SupportPanel() {
                   onClick={() => setShowHistory(false)}
                   className={`flex-1 py-2 text-sm font-medium transition-colors ${!showHistory ? 'text-white border-b-2 border-white' : 'text-green-200 hover:text-white'}`}
                 >
-                  Activos ({chats.length})
+                  {t('chat.active')} ({chats.length})
                 </button>
                 <button
                   onClick={loadHistory}
                   className={`flex-1 py-2 text-sm font-medium transition-colors ${showHistory ? 'text-white border-b-2 border-white' : 'text-green-200 hover:text-white'}`}
                 >
-                  Historial
+                  {t('chat.history')}
                 </button>
               </div>
             )}
@@ -507,8 +509,8 @@ function SupportPanel() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <h4 className="text-lg font-semibold text-gray-800">Acceso Soporte</h4>
-                  <p className="text-gray-600 text-sm mt-1">Introduce tu nombre para comenzar</p>
+                  <h4 className="text-lg font-semibold text-gray-800">{t('chat.accessSupport')}</h4>
+                  <p className="text-gray-600 text-sm mt-1">{t('chat.enterName')}</p>
                 </div>
                 
                 <div className="space-y-3">
@@ -516,7 +518,7 @@ function SupportPanel() {
                     type="text"
                     value={agentName}
                     onChange={(e) => setAgentName(e.target.value)}
-                    placeholder="Tu nombre"
+                    placeholder={t('chat.yourName')}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
                     onKeyPress={(e) => e.key === 'Enter' && joinAsSupport()}
                   />
@@ -525,7 +527,7 @@ function SupportPanel() {
                     disabled={!isConnected}
                     className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white py-2 rounded-lg font-medium transition-colors"
                   >
-                    Entrar al panel
+                    {t('chat.enterPanel')}
                   </button>
                 </div>
               </div>
@@ -539,7 +541,7 @@ function SupportPanel() {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto mb-3 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                     </svg>
-                    <p>No hay chats pendientes</p>
+                    <p>{t('chat.noPending')}</p>
                   </div>
                 ) : (
                   <div className="space-y-2">
@@ -558,7 +560,7 @@ function SupportPanel() {
                             <p className="font-medium text-gray-800">{chat.client_name}</p>
                             <p className="text-xs text-gray-500">{formatTime(chat.created_at)}</p>
                             {chat.agentName && chat.status === 'active' && (
-                              <p className="text-xs text-green-600 mt-1">Atendido por {chat.agentName}</p>
+                              <p className="text-xs text-green-600 mt-1">{t('chat.attendedBy')} {chat.agentName}</p>
                             )}
                           </div>
                           <span className={`text-xs px-2 py-1 rounded-full ${
@@ -566,11 +568,11 @@ function SupportPanel() {
                               ? 'bg-yellow-200 text-yellow-800'
                               : 'bg-green-200 text-green-800'
                           }`}>
-                            {chat.status === 'pending' ? 'Pendiente' : 'Activo'}
+                            {chat.status === 'pending' ? t('chat.pending') : t('chat.active')}
                           </span>
                         </div>
                         <p className="text-xs mt-2 ${chat.status === 'pending' ? 'text-yellow-700' : 'text-green-700'}">
-                          {chat.status === 'pending' ? 'Click para atender' : 'Click para ver'}
+                          {chat.status === 'pending' ? t('chat.clickToAttend') : t('chat.clickToView')}
                         </p>
                       </div>
                     ))}
@@ -587,7 +589,7 @@ function SupportPanel() {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto mb-3 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <p>No hay chats en el historial</p>
+                    <p>{t('chat.noHistory')}</p>
                   </div>
                 ) : (
                   <div className="space-y-2">
@@ -607,11 +609,11 @@ function SupportPanel() {
                               <span className="text-yellow-500 text-sm">{'⭐'.repeat(chat.rating)}</span>
                             )}
                             <span className="text-xs px-2 py-1 rounded-full bg-gray-200 text-gray-600">
-                              Cerrado
+                              {t('chat.closed')}
                             </span>
                           </div>
                         </div>
-                        <p className="text-xs text-gray-500 mt-2">Click para ver conversación</p>
+                        <p className="text-xs text-gray-500 mt-2">{t('chat.viewConversation')}</p>
                       </div>
                     ))}
                   </div>
@@ -635,7 +637,7 @@ function SupportPanel() {
 
                 {/* Mensajes */}
                 {historyMessages.length === 0 ? (
-                  <p className="text-center text-gray-500 text-sm py-4">No hay mensajes en este chat</p>
+                  <p className="text-center text-gray-500 text-sm py-4">{t('chat.noMessages')}</p>
                 ) : (
                   historyMessages.map((msg) => (
                     <div
@@ -699,7 +701,7 @@ function SupportPanel() {
                   <div className="flex justify-start">
                     <div className="bg-gray-200 text-gray-600 px-4 py-2 rounded-2xl rounded-bl-md">
                       <div className="flex items-center gap-1">
-                        <span className="text-xs">{typingUser} está escribiendo</span>
+                        <span className="text-xs">{typingUser} {t('chat.isTyping')}</span>
                         <span className="flex gap-1">
                           <span className="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
                           <span className="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
@@ -788,7 +790,7 @@ function SupportPanel() {
                     type="text"
                     value={inputMessage}
                     onChange={handleTyping}
-                    placeholder="Escribe tu respuesta..."
+                    placeholder={t('chat.writeResponse')}
                     className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none text-sm"
                   />
                   <button
@@ -807,7 +809,7 @@ function SupportPanel() {
                   onClick={closeChat}
                   className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg text-sm font-medium transition-colors"
                 >
-                  Cerrar chat y solicitar valoración
+                  {t('chat.closeChat')}
                 </button>
               </div>
             </div>
@@ -817,20 +819,20 @@ function SupportPanel() {
           {showTransferModal && (
             <div className="absolute inset-0 bg-black/50 flex items-center justify-center p-4 z-20">
               <div className="bg-white rounded-lg p-4 w-full max-w-xs">
-                <h4 className="font-semibold text-gray-800 mb-3">Transferir chat</h4>
-                <p className="text-sm text-gray-600 mb-3">Esta función transferirá el chat a otro agente disponible.</p>
+                <h4 className="font-semibold text-gray-800 mb-3">{t('chat.transferTitle')}</h4>
+                <p className="text-sm text-gray-600 mb-3">{t('chat.transferDesc')}</p>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setShowTransferModal(false)}
                     className="flex-1 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50"
                   >
-                    Cancelar
+                    {t('chat.cancel')}
                   </button>
                   <button
                     onClick={() => transferChat('next_available')}
                     className="flex-1 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700"
                   >
-                    Transferir
+                    {t('chat.transfer')}
                   </button>
                 </div>
               </div>

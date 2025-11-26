@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function BotonIniciarSesion() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -11,7 +13,7 @@ function BotonIniciarSesion() {
           navigate('/login');
         }}
       >
-        Iniciar sesión
+        {t('nav.login')}
       </button>
     </>
   );

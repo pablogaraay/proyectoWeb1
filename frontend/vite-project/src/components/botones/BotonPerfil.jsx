@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function BotonPerfil() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -11,7 +13,7 @@ function BotonPerfil() {
           navigate('/account');
         }}
       >
-        Tu Perfil
+        {t('nav.account')}
       </button>
     </>
   );

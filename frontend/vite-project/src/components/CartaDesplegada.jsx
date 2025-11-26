@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { INVITADO } from '../constantes';
 
 function CartaDesplegada({ carta, onClose }) {
+  const { t } = useTranslation();
   const [valoracion, setValoracion] = useState(0);
   const [comentario, setComentario] = useState('');
   const [comentarios, setComentarios] = useState([]);
@@ -72,7 +74,7 @@ function CartaDesplegada({ carta, onClose }) {
           {carta.descripcion}
         </p>
 
-        <label className="block text-gray-700 font-semibold">Valoración:</label>
+        <label className="block text-gray-700 font-semibold">{t('product.rating')}:</label>
         <select
           value={valoracion}
           onChange={(e) => setValoracion(Number(e.target.value))}
@@ -81,7 +83,7 @@ function CartaDesplegada({ carta, onClose }) {
           }`}
           disabled={!estaLogueado}
         >
-          <option value={0}>Sin valorar</option>
+          <option value={0}>{t('product.noRating')}</option>
           {[1, 2, 3, 4, 5].map((n) => (
             <option key={n} value={n}>
               {n} ⭐
@@ -94,8 +96,8 @@ function CartaDesplegada({ carta, onClose }) {
           onChange={(e) => setComentario(e.target.value)}
           placeholder={
             estaLogueado
-              ? 'Escribe un comentario...'
-              : 'Debes iniciar sesión para comentar.'
+              ? t('product.comment')
+              : t('product.loginToComment')
           }
           className={`w-full border rounded-lg p-2 mb-3 dark:bg-gray-700 dark:text-white ${
             !estaLogueado ? 'opacity-50 cursor-not-allowed' : ''
@@ -105,7 +107,7 @@ function CartaDesplegada({ carta, onClose }) {
 
         {!estaLogueado && (
           <p className="text-sm text-red-500 mb-2">
-            Para dejar un comentario o valoración debes estar registrado e iniciar sesión.
+            {t('product.loginRequired')}
           </p>
         )}
 
@@ -118,20 +120,20 @@ function CartaDesplegada({ carta, onClose }) {
           }`}
           disabled={!estaLogueado || comentarioVacio}
         >
-          Guardar
+          {t('product.save')}
         </button>
 
         <button
           onClick={onClose}
           className="ml-3 bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500 transition"
         >
-          Cerrar
+          {t('product.close')}
         </button>
 
         <div className="mt-4">
-          <h3 className="text-lg font-semibold">Comentarios:</h3>
+          <h3 className="text-lg font-semibold">{t('product.comments')}:</h3>
           {comentarios.length === 0 ? (
-            <p className="text-gray-500">Sin comentarios aún.</p>
+            <p className="text-gray-500">{t('product.noComments')}</p>
           ) : (
             <ul className="space-y-1">
               {comentarios.map((c, i) => (
@@ -145,7 +147,7 @@ function CartaDesplegada({ carta, onClose }) {
                       onClick={() => eliminarComentario(i)}
                       className="ml-2 text-xs text-red-500 hover:text-red-700"
                     >
-                      Eliminar
+                      {t('product.delete')}
                     </button>
                   )}
                 </li>
