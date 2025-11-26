@@ -4,9 +4,11 @@ const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
 
+const path = require('path');
 const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/admin');
+const productsRouter = require('./routes/products');
 const setupChatHandlers = require('./socket/chatHandler');
 
 const app = express();
@@ -33,10 +35,14 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Servir archivos estáticos (imágenes subidas)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Rutas nuevas
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/products', productsRouter);
 
 // Manejo básico de errores
 app.use((err, req, res, next) => {

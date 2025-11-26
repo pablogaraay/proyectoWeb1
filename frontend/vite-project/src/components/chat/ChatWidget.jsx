@@ -252,22 +252,22 @@ function ChatWidget({ esInvitado }) {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60]">
       {/* Botón flotante */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${
+        className={`w-12 h-12 sm:w-14 sm:h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${
           isOpen ? 'scale-0 opacity-0' : 'scale-100 opacity-100'
         }`}
         title={t('chat.openSupport')}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
       </button>
 
       {/* Ventana de chat */}
-      <div className={`absolute bottom-0 right-0 w-80 sm:w-96 h-[500px] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden border border-gray-200 transition-all duration-300 ease-out origin-bottom-right ${
+      <div className={`fixed bottom-20 right-4 sm:bottom-24 sm:right-6 w-80 sm:w-96 h-[450px] sm:h-[500px] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden border border-gray-200 transition-all duration-300 ease-out origin-bottom-right ${
         isOpen 
           ? 'scale-100 opacity-100 translate-y-0' 
           : 'scale-0 opacity-0 translate-y-4 pointer-events-none'

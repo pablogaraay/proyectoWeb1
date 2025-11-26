@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import ProductsManager from './admin/ProductsManager';
 
 const API_URL = 'http://localhost:3000/api';
 
 function AdminPanel() {
   const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState('users');
   const [users, setUsers] = useState([]);
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -136,20 +138,60 @@ function AdminPanel() {
     <div className="max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold text-slate-800 mb-6">{t('admin.title')}</h1>
 
-      {/* Mensajes de error/éxito */}
-      {error && (
-        <div className="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 flex justify-between">
-          <span>{error}</span>
-          <button onClick={() => setError(null)}>✕</button>
-        </div>
-      )}
-      {success && (
-        <div className="mb-4 p-4 bg-green-100 border-l-4 border-green-500 text-green-700">
-          {success}
-        </div>
-      )}
+      {/* Pestañas */}
+      <div className="flex border-b border-slate-200 mb-6">
+        <button
+          onClick={() => setActiveTab('users')}
+          className={`px-6 py-3 font-medium transition-colors ${
+            activeTab === 'users'
+              ? 'text-indigo-600 border-b-2 border-indigo-600'
+              : 'text-slate-500 hover:text-slate-700'
+          }`}
+        >
+          <span className="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            {t('admin.usersTab')}
+          </span>
+        </button>
+        <button
+          onClick={() => setActiveTab('products')}
+          className={`px-6 py-3 font-medium transition-colors ${
+            activeTab === 'products'
+              ? 'text-indigo-600 border-b-2 border-indigo-600'
+              : 'text-slate-500 hover:text-slate-700'
+          }`}
+        >
+          <span className="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+            {t('admin.productsTab')}
+          </span>
+        </button>
+      </div>
 
-      {/* Estadísticas */}
+      {/* Contenido de Productos */}
+      {activeTab === 'products' && <ProductsManager />}
+
+      {/* Contenido de Usuarios */}
+      {activeTab === 'users' && (
+        <>
+          {/* Mensajes de error/éxito */}
+          {error && (
+            <div className="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 flex justify-between">
+              <span>{error}</span>
+              <button onClick={() => setError(null)}>✕</button>
+            </div>
+          )}
+          {success && (
+            <div className="mb-4 p-4 bg-green-100 border-l-4 border-green-500 text-green-700">
+              {success}
+            </div>
+          )}
+
+          {/* Estadísticas */}
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-white rounded-xl shadow p-4 border border-slate-200">
@@ -318,37 +360,39 @@ function AdminPanel() {
           </div>
         )}
       </div>
-
+      
       {/* Modal cambiar contraseña */}
       {passwordModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-6 w-full max-w-md mx-4">
-            <h3 className="text-lg font-semibold mb-4">
-              {t('admin.changePasswordFor')} {passwordModal.email}
-            </h3>
-            <input
-              type="password"
-              placeholder={t('admin.newPassword')}
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-            />
-            <div className="flex gap-3">
-              <button
-                onClick={changePassword}
-                className="flex-1 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700"
-              >
-                {t('admin.changePassword')}
-              </button>
-              <button
-                onClick={() => { setPasswordModal(null); setNewPassword(''); }}
-                className="flex-1 bg-gray-400 text-white py-2 rounded-lg hover:bg-gray-500"
-              >
-                {t('common.cancel')}
-              </button>
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+              <div className="bg-white rounded-xl p-6 w-full max-w-md mx-4">
+                <h3 className="text-lg font-semibold mb-4">
+                  {t('admin.changePasswordFor')} {passwordModal.email}
+                </h3>
+                <input
+                  type="password"
+                  placeholder={t('admin.newPassword')}
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                />
+                <div className="flex gap-3">
+                  <button
+                    onClick={changePassword}
+                    className="flex-1 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700"
+                  >
+                    {t('admin.changePassword')}
+                  </button>
+                  <button
+                    onClick={() => { setPasswordModal(null); setNewPassword(''); }}
+                    className="flex-1 bg-gray-400 text-white py-2 rounded-lg hover:bg-gray-500"
+                  >
+                    {t('common.cancel')}
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          )}
+        </>
       )}
     </div>
   );

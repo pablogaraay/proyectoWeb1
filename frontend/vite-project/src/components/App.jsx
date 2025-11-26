@@ -34,21 +34,23 @@ function App() {
   };
 
   return (
-    <div className="App">
-      {/* Navigation */}
-      <Nav esInvitado={esInvitado} />
+    <>
+      <div className="App min-h-screen">
+        {/* Navigation */}
+        <Nav esInvitado={esInvitado} />
 
-      {/* Main Content Container */}
-      <div className="max-w-6xl mx-auto px-8 py-12">
-        <Outlet context={{ handleInvitado, esInvitado }} />
+        {/* Main Content Container */}
+        <div className="max-w-6xl mx-auto px-8 py-12">
+          <Outlet context={{ handleInvitado, esInvitado }} />
+        </div>
       </div>
 
-      {/* Chat de soporte - Widget para clientes (NO para soporte) */}
+      {/* Chat de soporte - Widget para clientes (NO para soporte) - FUERA del contenedor */}
       {userRole !== 'support' && <ChatWidget esInvitado={esInvitado} />}
       
       {/* Panel de soporte - Solo visible para agentes */}
       {userRole === 'support' && <SupportPanel />}
-    </div>
+    </>
   );
 }
 
