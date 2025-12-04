@@ -78,7 +78,7 @@ La base de datos se crea automáticamente al iniciar el servidor por primera vez
 
 ## 🔑 Credenciales de Prueba
 
-- **Admin**: `victor@prueba.com` / `victor`
+- **Admin**: `marinjesusalfonso@gmail.com` / `jmarin8`
 - **Cliente**: Registro libre disponible
 
 ## 🌐 URLs de Acceso
