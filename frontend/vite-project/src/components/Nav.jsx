@@ -6,6 +6,7 @@ import BotonIniciarSesion from './botones/BotonIniciarSesion.jsx';
 import BotonNoticias from './botones/BotonNoticias.jsx';
 import BotonPerfil from './botones/BotonPerfil.jsx';
 import BotonAdmin from './botones/BotonAdmin.jsx';
+import BotonFavoritos from './botones/BotonFavoritos.jsx';
 import LanguageSelector from './LanguageSelector.jsx';
 import { INVITADO } from '../constantes.js';
 import { useLocation } from 'react-router-dom';
@@ -13,7 +14,7 @@ import { useLocation } from 'react-router-dom';
 function Nav({ esInvitado }) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  
+
   // Obtener rol del usuario desde localStorage
   const getUserRole = () => {
     try {
@@ -23,7 +24,7 @@ function Nav({ esInvitado }) {
       return 'client';
     }
   };
-  
+
   const userRole = getUserRole();
 
   return (
@@ -39,6 +40,9 @@ function Nav({ esInvitado }) {
           <BotonCatalogo isActive={location.pathname === '/catalogo'} />
           <BotonNoticias isActive={location.pathname === '/noticias'} />
           <BotonAboutUs isActive={location.pathname === '/aboutus'} />
+          {esInvitado === INVITADO.NO && (
+            <BotonFavoritos isActive={location.pathname === '/favoritos'} />
+          )}
         </div>
 
         {/* Derecha - Desktop */}
@@ -55,7 +59,7 @@ function Nav({ esInvitado }) {
         </div>
 
         {/* Menú hamburguesa - Mobile */}
-        <button 
+        <button
           onClick={() => setMenuOpen(!menuOpen)}
           className='md:hidden p-2 text-slate-600 hover:text-slate-800'
         >
@@ -78,6 +82,9 @@ function Nav({ esInvitado }) {
             <BotonCatalogo isActive={location.pathname === '/catalogo'} />
             <BotonNoticias isActive={location.pathname === '/noticias'} />
             <BotonAboutUs isActive={location.pathname === '/aboutus'} />
+            {esInvitado === INVITADO.NO && (
+              <BotonFavoritos isActive={location.pathname === '/favoritos'} />
+            )}
           </div>
           <div className='flex items-center justify-between pt-3 border-t border-slate-100'>
             <LanguageSelector />
