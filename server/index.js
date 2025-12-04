@@ -9,6 +9,7 @@ const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/admin');
 const productsRouter = require('./routes/products');
+const favoritesRouter = require('./routes/favorites');
 const setupChatHandlers = require('./socket/chatHandler');
 
 const app = express();
@@ -43,6 +44,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/favorites', favoritesRouter);
 
 // Manejo básico de errores
 app.use((err, req, res, next) => {

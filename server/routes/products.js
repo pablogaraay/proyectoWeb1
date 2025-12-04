@@ -148,7 +148,7 @@ router.post('/:id/reviews', requireAuth, (req, res) => {
         SET rating = ?, comment = ?, created_at = CURRENT_TIMESTAMP
         WHERE product_id = ? AND user_id = ?
       `;
-      db.run(sqlUpdate, [rating, comment || null, id, userId], function(err2) {
+      db.run(sqlUpdate, [rating, comment || null, id, userId], function (err2) {
         if (err2) {
           console.error('Error actualizando review:', err2);
           return res.status(500).json({ error: 'Error interno' });
@@ -161,7 +161,7 @@ router.post('/:id/reviews', requireAuth, (req, res) => {
         INSERT INTO product_reviews (product_id, user_id, rating, comment)
         VALUES (?, ?, ?, ?)
       `;
-      db.run(sqlInsert, [id, userId, rating, comment || null], function(err2) {
+      db.run(sqlInsert, [id, userId, rating, comment || null], function (err2) {
         if (err2) {
           console.error('Error creando review:', err2);
           return res.status(500).json({ error: 'Error interno' });
@@ -178,7 +178,7 @@ router.delete('/:id/reviews', requireAuth, (req, res) => {
   const userId = req.user.id;
 
   const sql = 'DELETE FROM product_reviews WHERE product_id = ? AND user_id = ?';
-  db.run(sql, [id, userId], function(err) {
+  db.run(sql, [id, userId], function (err) {
     if (err) {
       console.error('Error eliminando review:', err);
       return res.status(500).json({ error: 'Error interno' });
@@ -229,7 +229,7 @@ router.post('/', requireAuth, requireSupport, upload.single('image'), (req, res)
     VALUES (?, ?, ?, ?, ?, ?)
   `;
 
-  db.run(sql, [name, description || null, imageUrl, brand || null, color || null, price || 0], function(err) {
+  db.run(sql, [name, description || null, imageUrl, brand || null, color || null, price || 0], function (err) {
     if (err) {
       console.error('Error creando producto:', err);
       return res.status(500).json({ error: 'Error interno' });
@@ -287,7 +287,7 @@ router.put('/:id', requireAuth, requireSupport, upload.single('image'), (req, re
 
     const activeValue = active !== undefined ? (active === 'true' || active === true ? 1 : 0) : null;
 
-    db.run(sql, [name, description, imageUrl, brand, color, price, activeValue, id], function(err2) {
+    db.run(sql, [name, description, imageUrl, brand, color, price, activeValue, id], function (err2) {
       if (err2) {
         console.error('Error actualizando producto:', err2);
         return res.status(500).json({ error: 'Error interno' });
@@ -308,7 +308,7 @@ router.patch('/:id/toggle', requireAuth, requireSupport, (req, res) => {
   const { id } = req.params;
 
   const sql = 'UPDATE products SET active = NOT active, updated_at = CURRENT_TIMESTAMP WHERE id = ?';
-  db.run(sql, [id], function(err) {
+  db.run(sql, [id], function (err) {
     if (err) {
       console.error('Error toggling producto:', err);
       return res.status(500).json({ error: 'Error interno' });
@@ -350,7 +350,7 @@ router.delete('/:id', requireAuth, requireSupport, (req, res) => {
 
     // Eliminar producto (las reviews se eliminan por CASCADE)
     const sql = 'DELETE FROM products WHERE id = ?';
-    db.run(sql, [id], function(err2) {
+    db.run(sql, [id], function (err2) {
       if (err2) {
         console.error('Error eliminando producto:', err2);
         return res.status(500).json({ error: 'Error interno' });
@@ -360,4 +360,54 @@ router.delete('/:id', requireAuth, requireSupport, (req, res) => {
   });
 });
 
+router.get('/:id/favorite', requireAuth, (req, res) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+
+  const sql = `SELECT id FROM favorites WHERE product_id = ? AND user_id = ?`;
+
+  db.get(sql, [id, userId], (err, row) => {
+    if (err) {
+      console.error('Error obteniendo favorito:', err);
+      return res.status(500).json({ error: 'Error interno' });
+    }
+    if (!row) {
+      return res.status(404).json({ error: 'Favorito no encontrado' });
+    }
+    res.json(row);
+  });
+});
+
+router.post('/:id/favorite', requireAuth, (req, res) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+
+  const sql = `INSERT INTO favorites (product_id, user_id) VALUES (?, ?)`;
+
+  db.run(sql, [id, userId], function (err) {
+    if (err) {
+      console.error('Error añadiendo favorito:', err);
+      return res.status(500).json({ error: 'Error interno' });
+    }
+    res.status(201).json({ success: true, message: 'Favorito añadido' });
+  });
+});
+
+router.delete('/:id/favorite', requireAuth, (req, res) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+
+  const sql = `DELETE FROM favorites WHERE product_id = ? AND user_id = ?`;
+
+  db.run(sql, [id, userId], function (err) {
+    if (err) {
+      console.error('Error eliminando favorito:', err);
+      return res.status(500).json({ error: 'Error interno' });
+    }
+    else if (this.changes === 0) {
+      return res.status(404).json({ error: 'Favorito no encontrado' });
+    }
+    res.status(200).json({ success: true, message: 'Eliminado de favoritos' });
+  });
+});
 module.exports = router;

@@ -5,6 +5,7 @@ import BotonBuscador from './botones/BotonBuscador.jsx';
 import BarraBuscador from './BarraBuscador.jsx';
 import { BUSCADOR } from '../constantes.js';
 import ProductDetail from './ProductDetail';
+import { useFavorites } from '../hooks/useFavorites';
 
 const API_URL = 'http://localhost:3000/api';
 
@@ -15,6 +16,10 @@ function Catalogo() {
   const [mostrarBuscador, setMostrarBuscador] = useState(BUSCADOR.INEXISTENTE);
   const [filtrar, setFiltrar] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const token = localStorage.getItem('token');
+  const isLoggedIn = !!token;
+  const { favoriteIds, toggleFavorite } = useFavorites(isLoggedIn);
 
   const [marcaFiltro, setMarcaFiltro] = useState('');
   const [colorFiltro, setColorFiltro] = useState('');
@@ -40,12 +45,12 @@ function Catalogo() {
   };
 
   // Extraer marcas y colores únicos de los productos
-  const marcasDisponibles = useMemo(() => 
+  const marcasDisponibles = useMemo(() =>
     [...new Set(products.map(p => p.brand).filter(Boolean))],
     [products]
   );
 
-  const coloresDisponibles = useMemo(() => 
+  const coloresDisponibles = useMemo(() =>
     [...new Set(products.map(p => p.color).filter(Boolean))],
     [products]
   );
@@ -63,7 +68,7 @@ function Catalogo() {
     const textoOk = product.name.toLowerCase().includes(filtrar.trim().toLowerCase());
     const marcaOk = !marcaFiltro || product.brand === marcaFiltro;
     const colorOk = !colorFiltro || product.color === colorFiltro;
-    
+
     const precio = Number(product.price);
     const min = precioMin !== '' ? Number(precioMin) : null;
     const max = precioMax !== '' ? Number(precioMax) : null;
@@ -205,38 +210,42 @@ function Catalogo() {
           </div>
         </div>
 
-      {/* Loading */}
-      {loading && (
-        <div className="flex justify-center items-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-        </div>
-      )}
+        {/* Loading */}
+        {loading && (
+          <div className="flex justify-center items-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+          </div>
+        )}
 
-      {/* Grid de productos - 2 columnas en móvil */}
+        {/* Grid de productos - 2 columnas en móvil */}
         {!loading && (
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
-          {productosFiltrados.length === 0 ? (
-            <div className="col-span-full text-center py-12 text-gray-500">
-              <p>{t('catalog.noProducts')}</p>
-            </div>
-          ) : (
-            productosFiltrados.map((product) => (
-              <CatalogoCard
-                key={product.id}
-                titulo={product.name}
-                descripcion={product.description}
-                imagen={product.image_url ? `http://localhost:3000${product.image_url}` : null}
-                precio={product.price}
-                rating={product.avg_rating}
-                reviewCount={product.review_count}
-                onClick={() => setSelectedProduct(product)}
-              />
-            ))
-          )}
-        </div>
-      )}
+            {productosFiltrados.length === 0 ? (
+              <div className="col-span-full text-center py-12 text-gray-500">
+                <p>{t('catalog.noProducts')}</p>
+              </div>
+            ) : (
+              productosFiltrados.map((product) => (
+                <CatalogoCard
+                  key={product.id}
+                  titulo={product.name}
+                  descripcion={product.description}
+                  imagen={product.image_url ? `http://localhost:3000${product.image_url}` : null}
+                  precio={product.price}
+                  rating={product.avg_rating}
+                  reviewCount={product.review_count}
+                  onClick={() => setSelectedProduct(product)}
 
-      {/* Modal de detalle del producto */}
+                  isFavorite={favoriteIds.includes(String(product.id))}
+                  onFavoriteToggle={() => toggleFavorite(product.id)}
+                  showFavoriteButton={isLoggedIn}
+                />
+              ))
+            )}
+          </div>
+        )}
+
+        {/* Modal de detalle del producto */}
         {selectedProduct && (
           <ProductDetail
             product={selectedProduct}

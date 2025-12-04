@@ -7,6 +7,7 @@ const dbPath = path.join(__dirname, 'database.sqlite');
 const db = new sqlite3.Database(dbPath);
 
 // Configurar SQLite para mejor concurrencia
+db.run('PRAGMA foreign_keys = ON');
 db.run('PRAGMA busy_timeout = 5000'); // Esperar 5 segundos si está bloqueada
 db.run('PRAGMA journal_mode = WAL');  // Write-Ahead Logging para mejor concurrencia
 
@@ -78,8 +79,22 @@ db.serialize(() => {
       rating INTEGER CHECK(rating >= 1 AND rating <= 5),
       comment TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE(product_id, user_id),
       FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+
+  // Tabla de favoritos
+  db.run(`
+    CREATE TABLE IF NOT EXISTS favorites (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      product_id INTEGER NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE(user_id, product_id),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
     )
   `);
 });
