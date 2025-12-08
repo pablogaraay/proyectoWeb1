@@ -7,7 +7,8 @@
     "account": "My Account",
     "login": "Login",
     "register": "Register",
-    "admin": "Admin"
+    "admin": "Admin",
+    "favorites": "Favorites"
   },
   "home": {
     "welcome": "Welcome to our website",
@@ -109,11 +110,17 @@
     "feature1": "Complete catalog of high-end watches",
     "feature2": "Community reviews and ratings",
     "feature3": "News and trends in the watch industry",
-    "feature4": "Comparisons and buying guides"
+    "feature4": "Comparisons and buying guides",
+    "quality": "Quality",
+    "time": "Time"
   },
   "news": {
     "title": "News",
-    "description": "Coming soon you will find the latest news here."
+    "description": "Coming soon you will find the latest news here.",
+    "news1": "Rolex unveils its new 2025 collection featuring innovations in ceramic materials and next-generation movements that promise to revolutionize haute horlogerie.",
+    "news2": "Patek Philippe announces a limited edition of the legendary Nautilus, commemorating 50 years of iconic design with exclusive rose gold details.",
+    "news3": "Omega renews its partnership with the Olympic Games and launches special chronographs with latest-generation METAS-certified anti-magnetic technology.",
+    "news4": "Auction houses report historic records in vintage watchmaking, with Audemars Piguet pieces reaching unprecedented values in the international market."
   },
   "chat": {
     "support": "Support",
@@ -248,5 +255,22 @@
     "filter": "Filter",
     "all": "All",
     "none": "None"
+  },
+  "colors": {
+    "Azul": "Blue",
+    "Negro": "Black",
+    "Blanco": "White",
+    "Plateado": "Silver",
+    "Gris": "Gray",
+    "Oro": "Gold",
+    "Verde": "Green",
+    "Marrón": "Brown",
+    "Rosa": "Pink"
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "subtitle": "Here you can see the products you have marked as favorites.",
+    "loginRequired": "You must log in to view your favorites.",
+    "noFavorites": "You don't have any favorite products yet."
   }
 }

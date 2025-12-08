@@ -1,4 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 function RelojAboutUsIcono() {
+  const { t } = useTranslation();
+
   return (
     <div className='relative group w-52 h-52 bg-linear-to-br from-indigo-600 via-indigo-700 to-indigo-800 rounded-3xl flex flex-col items-center justify-center shadow-2xl hover:shadow-indigo-600/60 transition-all duration-500 hover:scale-110 hover:-translate-y-2'>
       {/* Brillo sutil en la esquina */}
@@ -18,7 +22,7 @@ function RelojAboutUsIcono() {
         />
       </svg>
       <span className='text-white font-bold text-base tracking-wider uppercase'>
-        Tiempo
+        {t('about.time')}
       </span>
     </div>
   );

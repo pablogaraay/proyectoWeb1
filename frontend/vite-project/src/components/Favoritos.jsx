@@ -88,9 +88,7 @@ function Favoritos() {
   if (authError) {
     return (
       <div className='min-h-screen flex items-center justify-center'>
-        <p className='text-slate-600'>
-          Debes iniciar sesión para ver tus favoritos.
-        </p>
+        <p className='text-slate-600'>{t('favorites.loginRequired')}</p>
       </div>
     );
   }
@@ -101,10 +99,10 @@ function Favoritos() {
         <div className='max-w-7xl mx-auto'>
           <div className='bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-6 sm:py-8 lg:py-10 px-4 sm:px-6 lg:px-8 rounded-xl sm:rounded-2xl shadow-xl'>
             <h1 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2'>
-              Mis favoritos
+              {t('favorites.title')}
             </h1>
             <p className='text-slate-300 text-sm sm:text-base max-w-2xl'>
-              Aquí puedes ver los productos que has marcado como favoritos.
+              {t('favorites.subtitle')}
             </p>
           </div>
         </div>
@@ -113,7 +111,7 @@ function Favoritos() {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12'>
         {favorites.length === 0 ? (
           <div className='text-center py-12 text-slate-500'>
-            <p>No tienes productos favoritos todavía.</p>
+            <p>{t('favorites.noFavorites')}</p>
           </div>
         ) : (
           <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6'>

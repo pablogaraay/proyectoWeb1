@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import LogoHome from './logos/LogoHome.jsx';
 
 function Home() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -27,7 +29,10 @@ function Home() {
 
           {/* Call to Action */}
           <div className='pt-8'>
-            <button className='px-8 py-3 bg-indigo-600 text-indigo-50 font-medium rounded-2xl hover:bg-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg'>
+            <button
+              onClick={() => navigate('/catalogo')}
+              className='px-8 py-3 bg-indigo-600 text-indigo-50 font-medium rounded-2xl hover:bg-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg'
+            >
               {t('home.explore')}
             </button>
           </div>

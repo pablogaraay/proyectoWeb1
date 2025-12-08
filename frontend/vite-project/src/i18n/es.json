@@ -7,7 +7,8 @@
     "account": "Mi Cuenta",
     "login": "Iniciar Sesión",
     "register": "Registrarse",
-    "admin": "Admin"
+    "admin": "Admin",
+    "favorites": "Favoritos"
   },
   "home": {
     "welcome": "Bienvenido a nuestro sitio web",
@@ -109,11 +110,17 @@
     "feature1": "Catálogo completo de relojes de alta gama",
     "feature2": "Reseñas y valoraciones de la comunidad",
     "feature3": "Noticias y tendencias del sector relojero",
-    "feature4": "Comparativas y guías de compra"
+    "feature4": "Comparativas y guías de compra",
+    "quality": "Calidad",
+    "time": "Tiempo"
   },
   "news": {
     "title": "Noticias",
-    "description": "Próximamente encontrarás aquí las últimas novedades."
+    "description": "Próximamente encontrarás aquí las últimas novedades.",
+    "news1": "Rolex presenta su nueva colección 2025 con innovaciones en materiales cerámicos y movimientos de próxima generación que prometen revolucionar la alta relojería.",
+    "news2": "Patek Philippe anuncia una edición limitada del legendario Nautilus, conmemorando 50 años de diseño icónico con detalles exclusivos en oro rosa.",
+    "news3": "Omega renueva su alianza con los Juegos Olímpicos y lanza cronógrafos especiales con tecnología anti-magnética certificada METAS de última generación.",
+    "news4": "Las casas de subastas reportan récords históricos en relojería vintage, con piezas de Audemars Piguet alcanzando valores sin precedentes en el mercado internacional."
   },
   "chat": {
     "support": "Soporte",
@@ -248,5 +255,22 @@
     "filter": "Filtrar",
     "all": "Todos",
     "none": "Ninguno"
+  },
+  "colors": {
+    "Azul": "Azul",
+    "Negro": "Negro",
+    "Blanco": "Blanco",
+    "Plateado": "Plateado",
+    "Gris": "Gris",
+    "Oro": "Oro",
+    "Verde": "Verde",
+    "Marrón": "Marrón",
+    "Rosa": "Rosa"
+  },
+  "favorites": {
+    "title": "Mis favoritos",
+    "subtitle": "Aquí puedes ver los productos que has marcado como favoritos.",
+    "loginRequired": "Debes iniciar sesión para ver tus favoritos.",
+    "noFavorites": "No tienes productos favoritos todavía."
   }
 }
