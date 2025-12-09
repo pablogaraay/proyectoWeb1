@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import CatalogoCard from './cards/CatalogoCard';
+import ProductDetail from './ProductDetail';
 
 const API_URL = 'http://localhost:3000/api'; // igual que en Catalogo
 
@@ -9,6 +10,7 @@ function Favoritos() {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [authError, setAuthError] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -68,9 +70,9 @@ function Favoritos() {
       // Actualizamos el estado local
       if (isFavorite) {
         setFavorites((prev) => prev.filter((p) => p.id !== productId));
-      } else {
-        // Si quieres permitir añadir desde aquí, tendrías que recargar
-        // o tener el producto completo. En esta vista normalmente solo quitamos.
+        setSelectedProduct((prev) =>
+          prev && prev.id === productId ? null : prev
+        );
       }
     } catch (err) {
       console.error('Error actualizando favorito:', err);
@@ -129,7 +131,7 @@ function Favoritos() {
                 rating={product.avg_rating}
                 reviewCount={product.review_count}
                 onClick={() => {
-                  /* si quieres abrir detalle, aquí */
+                  setSelectedProduct(product);
                 }}
                 // siempre son favoritos en esta vista
                 isFavorite={true}
@@ -140,6 +142,12 @@ function Favoritos() {
           </div>
         )}
       </div>
+      {selectedProduct && (
+        <ProductDetail
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
     </div>
   );
 }
